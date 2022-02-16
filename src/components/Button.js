@@ -5,6 +5,10 @@ export default function App(props) {
   //props.text
 
   let handlePress = () => {
+    if (props.isDisabled) {
+      return
+    }
+    props.onPress(props.id)
     // console.warn(props.text)
     // TODO tell our game that I have been pressed.
   }
@@ -12,8 +16,8 @@ export default function App(props) {
   return (
     // Button will light up on-press with the passed props text
     <TouchableOpacity onPress={handlePress}>
-      {/*  */}
-      <Text style={[styles.randomButton, props.isSelected && styles.selected]}>
+      {/* Button styling (disabled or active) */}
+      <Text style={[styles.randomButton, props.isDisabled && styles.disabled]}>
         {props.text}
       </Text>
     </TouchableOpacity>
@@ -30,7 +34,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 20
   },
-  selected: {
+  disabled: {
     opacity: 0.3
   }
 })
