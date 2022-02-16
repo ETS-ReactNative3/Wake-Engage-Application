@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Button from './Button.js'
 
 export default function App(props) {
   //props.numberOfOptionButtons
+
+  var state = {
+    //Will store the index of the selected numbers
+    selectedNumbers: [1]
+  }
 
   // Create an array of size from a prop and map each int to a random number
   var randomNumbers = Array.from({ length: props.numberOfOptionButtons }).map(
@@ -18,14 +23,24 @@ export default function App(props) {
     .reduce((acc, curr) => acc + curr, 0)
   // TODO: Shuffle the random numbers of the array (right now answer is always first 4)
 
+  // Function that receives index of number pressed
+  var isNumberSelected = (numberIndex) => {
+    // If button is not in array, it will return false (button is not in selected numbers array)
+    return state.selectedNumbers.indexOf(numberIndex) >= 0
+  }
+
   return (
     <View style={styles.fullPageContainer}>
       <Text style={styles.target}>{target}</Text>
       <View style={styles.randomButtonsContainer}>
         {
           // Prints every item in the random numbers array
-          randomNumbers.map((randomNumber, index) => (
-            <Button key={index} text={randomNumber}></Button>
+          randomNumbers.map((buttonNumberText, index) => (
+            <Button
+              key={index}
+              text={buttonNumberText}
+              isSelected={isNumberSelected(index)}
+            ></Button>
           ))
         }
       </View>
