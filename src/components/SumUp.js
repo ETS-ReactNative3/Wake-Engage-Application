@@ -82,7 +82,7 @@ export default function App(props) {
         }
         {
           // if a user has won/lost the game, they will have the option to Play Again
-          gameStatus !== 'PLAYING' && (
+          gameStatus === 'LOST' && (
             <MyButton
               text={'Play Again'}
               onPress={props.onPlayAgain}
@@ -90,6 +90,17 @@ export default function App(props) {
             ></MyButton>
           )
         }
+        {
+          // if a user has won/lost the game, they will have the option to Play Again
+          gameStatus === 'WON' && (
+            <MyButton
+              text={'Shut this song off:)'}
+              onPress={props.onWinCondition}
+              isPlayAgain={true}
+            ></MyButton>
+          )
+        }
+
       </View>
     </View>
   )
