@@ -17,7 +17,13 @@ export default function App(props) {
     // Button will light up on-press with the passed props text
     <TouchableOpacity onPress={handlePress}>
       {/* Button styling (disabled or active) */}
-      <Text style={[styles.randomButton, props.isDisabled && styles.disabled]}>
+      <Text
+        style={[
+          styles.randomButton,
+          props.isDisabled && styles.disabled,
+          props.isPlayAgain && styles.isPlayAgain
+        ]}
+      >
         {props.text}
       </Text>
     </TouchableOpacity>
@@ -36,5 +42,9 @@ const styles = StyleSheet.create({
   },
   disabled: {
     opacity: 0.3
+  },
+  isPlayAgain: {
+    backgroundColor: 'red',
+    width: 400
   }
 })
