@@ -58,6 +58,7 @@ export default function App(props) {
       return 'LOST'
     }
   }
+
   var gameStatus = CalculateGameStatus()
 
   return (
@@ -94,13 +95,12 @@ export default function App(props) {
           // if a user has won/lost the game, they will have the option to Play Again
           gameStatus === 'WON' && (
             <MyButton
-              text={'Shut this song off:)'}
+              text={'Shut this song off!'}
               onPress={props.onWinCondition}
               isPlayAgain={true}
             ></MyButton>
           )
         }
-
       </View>
     </View>
   )
