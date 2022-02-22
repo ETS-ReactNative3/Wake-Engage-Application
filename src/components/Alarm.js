@@ -1,42 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Text, View, Button, Platform } from 'react-native'
+import React, { useState } from 'react'
+import { Text, View, Button } from 'react-native'
 import * as Notifications from 'expo-notifications'
-import Constants from 'expo-constants'
+export default function Apps(props) {
+  // Pick a game to play on the alarm or set it to random
+  // Pick a time for a notification
+  // Set notification
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true
-  })
-})
+  let scheduleNotification = () => {
+    const trigger = new Date(Date.now()) // + 60 * 60 * 1000 +1hour
 
-export default function Apps() {
-  const [state, setState] = useState(0)
-  const [expoPushToken, setExpoPushToken] = useState('')
-  const [notification, setNotification] = useState(false)
-  const notificationListener = useRef()
-  const responseListener = useRef()
+    trigger.setHours(17)
+    trigger.setMinutes(50)
+    trigger.setSeconds(0)
 
-  // Runs every time its re
-  useEffect(() => {
-    registerForPushNotificationsAsync().then((token) => setExpoPushToken(token))
-
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification)
-      })
-
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response)
-      })
-
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current)
-      Notifications.removeNotificationSubscription(responseListener.current)
-    }
-  }, [])
+    console.log(trigger.toString())
+    props.setNotification(trigger)
+  }
 
   return (
     <View
@@ -46,125 +25,15 @@ export default function Apps() {
         justifyContent: 'space-around'
       }}
     >
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>
-          Title: {notification && notification.request.content.title}{' '}
-        </Text>
-        <Text>Body: {notification && notification.request.content.body}</Text>
-        <Text>
-          Data:{' '}
-          {notification && JSON.stringify(notification.request.content.data)}
-        </Text>
-      </View>
       <Button
         title="Press to schedule a notification"
-        onPress={async () => {
-          await schedulePushNotification()
-        }}
+        onPress={scheduleNotification}
       />
+
+      <Button title="Get all" onPress={getAllNotifications} />
+      <Button title="Cancell all" onPress={cancelAllNotifications} />
     </View>
   )
-}
-
-// async function schedulePushNotification() {
-//   console.log('Scheduling a notifications for 2 seconds in the future')
-
-//   await Notifications.scheduleNotificationAsync({
-//     content: {
-//       title: 'You have got mail!',
-//       body: 'Here is the notification body',
-//       data: { data: 'goes here' }
-//     },
-//     trigger: { seconds: 2 }
-//   })
-// }
-
-// useEffect(() => {
-//   registerForPushNotification()
-//     .then((token) => console.log('The token is: ', token))
-//     .catch((e) => console.log('Error:', e))
-// }, [])
-
-//   async function registerForPushNotification() {
-//     if (Device.isDevice) {
-//       const { status: existingStatus } = await Permissions.getAsync(
-//         Permissions.NOTIFICATIONS
-//       )
-//       let finalStatus = existingStatus
-//       if (existingStatus != 'granted') {
-//         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
-//         finalStatus = status
-//       }
-//       if (finalStatus != 'granted') {
-//         alert('Fail to get the push token')
-//         return
-//       }
-//       var token = (await Notifications.getExpoPushTokenAsync()).data
-//       console.log('The token is: ', token)
-//       setState({ expoPushToken: token })
-//       return token
-//     } else {
-//       alert('Must use physical device for Push Notifications')
-//     }
-//   }
-
-//   if (Platform.OS === 'android') {
-//     Notifications.setNotificationChannelAsync('default', {
-//       name: 'default',
-//       importance: Notifications.AndroidImportance.MAX,
-//       vibrationPattern: [0, 250, 250, 250],
-//       lightColor: '#FF231F7C'
-//     })
-//   }
-
-//   return (
-//     <View style={styles.container}>
-//       <Text onClick={schedulePushNotification}>Alarm.js page</Text>
-//     </View>
-//   )
-// }
-
-async function schedulePushNotification() {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: 'Game 1-2',
-      body: 'Here is the notification body',
-      data: { game: 'Game 1' }
-    },
-    trigger: { seconds: 10 }
-  })
-}
-
-async function registerForPushNotificationsAsync() {
-  let token
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync()
-    let finalStatus = existingStatus
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync()
-      finalStatus = status
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!')
-      return
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data
-    console.log(token)
-  } else {
-    alert('Must use physical device for Push Notifications')
-  }
-
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C'
-    })
-  }
-
-  return token
 }
 
 // const styles = StyleSheet.create({
@@ -173,3 +42,12 @@ async function registerForPushNotificationsAsync() {
 //     padding: 50
 //   }
 // })
+async function getAllNotifications() {
+  let hi = await Notifications.getAllScheduledNotificationsAsync()
+  console.log(hi)
+}
+
+async function cancelAllNotifications() {
+  let hi = await Notifications.cancelAllScheduledNotificationsAsync()
+  console.log(hi)
+}

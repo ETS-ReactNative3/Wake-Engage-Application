@@ -21,7 +21,7 @@ export default function Apps(prop) {
 
     // TODO STOP THE ALARM in the parent component
     // this will run a funciton in app.js called resetTheApp
-    prop.onWinCondition() 
+    prop.onWinCondition()
 
   }
 
