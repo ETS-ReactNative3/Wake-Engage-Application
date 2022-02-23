@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Button,
   Platform
 } from 'react-native'
 import * as Notifications from 'expo-notifications'
@@ -24,18 +23,11 @@ export default function App() {
   // Start playing a sound once App loads from a notification
   // If app opens naturally it will show the alarm component (GUI)
 
-  const [pageId, setPageId] = useState(0)
-  let handleGames = () => {
-    setPageId(1)
-  }
-  let handleAlarm = () => {
-    setPageId(2)
-  }
-
+  const [pageId, setPageId] = useState('alarm')
   let gameFinished = () => {
     console.log('Resetting the app from app.js')
     // shut off the alarm on the game is done
-    setPageId(0)
+    setPageId('alarm') // show alarm
   }
   let startAlarm = () => {
     console.log('Starting the alarm from app.js')
@@ -55,13 +47,16 @@ export default function App() {
 
   // Runs every time its re
   useEffect(() => {
+    // Get token
     registerForPushNotificationsAsync().then((token) => setExpoPushToken(token))
 
+    // Every time a notification is set this function is triggered (update notification)
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
         setNotification(notification)
       })
 
+    // Every time we receive a notification this function runs (app opens from notification and game runs)
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
         // console.log(response)
@@ -70,23 +65,20 @@ export default function App() {
           'Starting the game = ',
           response.notification.request.content.data.game
         )
-        // // Set the game to play
+        // Set the game to play
         setGame(response.notification.request.content.data.game)
-        // Start the game
-        setPageId(1)
+        // Start/Show the game
+        setPageId('games')
       })
 
     return () => {
+      // Stop app from listening in the background
       Notifications.removeNotificationSubscription(notificationListener.current)
       Notifications.removeNotificationSubscription(responseListener.current)
     }
   }, [])
   //    NOTIFICATIONS END
 
-  let scheduleNotification2 = (seconds) => {
-    schedulePushNotification(seconds)
-    setPageId(0)
-  }
   return (
     <View
       style={{
@@ -95,37 +87,13 @@ export default function App() {
         justifyContent: 'space-around'
       }}
     >
-      {pageId === 1 && <Games onWinCondition={gameFinished} game={game} />}
-      {pageId === 2 && <Alarm setNotification={scheduleNotification2} />}
-
-      <TouchableOpacity onPress={handleGames}>
-        <Text style={[styles.Button, { display }]}>Games</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleAlarm}>
-        <Text style={[styles.Button, { display }]}>Alarm</Text>
-      </TouchableOpacity>
-
-      {
-        /* Notifications debug code */
-        // <Text>Your expo push token: {expoPushToken}</Text>
-        // <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        //   <Text>
-        //     Title: {notification && notification.request.content.title}{' '}
-        //   </Text>
-        //   <Text>Body: {notification && notification.request.content.body}</Text>
-        //   <Text>
-        //     Data:{' '}
-        //     {notification && JSON.stringify(notification.request.content.data)}
-        //   </Text>
-        // </View>
-        // <Button
-        //   title="Press to schedule a notification"
-        //   onPress={async () => {
-        //     await schedulePushNotification()
-        //   }}
-        // />
-      }
+      {/* In games page */}
+      {pageId === 'games' && (
+        // User won the game
+        <Games onWinCondition={gameFinished} game={game} />
+      )}
+      {/* Redirect to alarm page */}
+      {pageId === 'alarm' && <Alarm />}
     </View>
   )
 }
@@ -142,20 +110,12 @@ const styles = StyleSheet.create({
   }
 })
 
-async function schedulePushNotification(secondsForNotification) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: 'Game 1',
-      body: 'Here is the notification body',
-      data: { game: '1' }
-    },
-    trigger: secondsForNotification
-  })
-}
-
+// Register with operating system to be allowed to send notifications
 async function registerForPushNotificationsAsync() {
   let token
+  // Check if using a physical device
   if (Constants.isDevice) {
+    // Get user permission to run notifications
     const { status: existingStatus } = await Notifications.getPermissionsAsync()
     let finalStatus = existingStatus
     if (existingStatus !== 'granted') {
@@ -166,12 +126,15 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!')
       return
     }
+    // If permission is granted, save token from notification
     token = (await Notifications.getExpoPushTokenAsync()).data
     console.log(token)
   } else {
+    // User is not on a physical device
     alert('Must use physical device for Push Notifications')
   }
 
+  // If using Android, set preferences
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
       name: 'default',
