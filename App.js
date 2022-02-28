@@ -9,7 +9,7 @@ import {
 import * as Notifications from 'expo-notifications'
 import Constants from 'expo-constants'
 import Games from './src/components/Games.js'
-import Alarm from './src/components/Alarm.js'
+import Alarm from './src/components/AlarmList.js'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -83,8 +83,9 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
+        alignItems: 'stretch',
+        width: 'auto',
+        backgroundColor: 'black'
       }}
     >
       {/* In games page */}
@@ -98,17 +99,17 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({
-  Button: {
-    backgroundColor: '#999',
-    width: 150,
-    marginTop: 100,
-    fontSize: 35,
-    textAlign: 'center',
-    paddingVertical: 20,
-    marginHorizontal: '30%'
-  }
-})
+// const styles = StyleSheet.create({
+//   Button: {
+//     backgroundColor: '#999',
+//     width: 150,
+//     marginTop: 100,
+//     fontSize: 35,
+//     textAlign: 'center',
+//     paddingVertical: 20,
+//     marginHorizontal: '30%'
+//   }
+// })
 
 // Register with operating system to be allowed to send notifications
 async function registerForPushNotificationsAsync() {
