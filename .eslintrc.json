@@ -27,7 +27,7 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
-    "no-console": ["warn", { "allow": ["info", "error"] }],
+    // "no-console": ["warn", { "allow": ["info", "error"] }],
     "arrow-parens": ["error", "always"],
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }]

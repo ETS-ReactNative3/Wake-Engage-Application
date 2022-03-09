@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Switch } from 'react-native'
-import * as Font from 'expo-font'
 
 export default function App(props) {
+  // console.log('ALARM.js -> date2.toString', new Date(props.date2).toString())
+
   const [isEnabled, setIsEnabled] = useState(false) // TODO get this status as a prop
   const toggleSwitch = () => {
-    console.log('toggled')
+    // console.log('toggled')
     setIsEnabled((previousState) => !previousState)
   }
 
@@ -65,7 +66,7 @@ export default function App(props) {
 // TODO make random buttom width dymanic not 350!
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#191919',
+    backgroundColor: 'grey',
     width: 380,
     marginBottom: 5,
     borderBottomLeftRadius: 20,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   text: {
     alignContent: 'flex-start',
     paddingLeft: 10,
-    color: 'dimgrey',
+    color: 'white',
     fontSize: 15,
     paddingBottom: 10
   },

@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Platform
-} from 'react-native'
+import { View, Platform, StyleSheet } from 'react-native'
 import * as Notifications from 'expo-notifications'
 import Constants from 'expo-constants'
 import Games from './src/components/Games.js'
-import Alarm from './src/components/AlarmList.js'
+import AlarmList from './src/components/AlarmList.js'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -20,32 +14,27 @@ Notifications.setNotificationHandler({
 })
 
 export default function App() {
-  // Start playing a sound once App loads from a notification
+  // TODO Start playing a sound once App loads from a notification
   // If app opens naturally it will show the alarm component (GUI)
 
-  const [pageId, setPageId] = useState('alarm')
+  const [pageId, setPageId] = useState('alarm') // or game
+
   let gameFinished = () => {
-    console.log('Resetting the app from app.js')
-    // shut off the alarm on the game is done
+    // console.log('Resetting the app from app.js')
+    // TODO shut off the alarm/sound on the game is done
     setPageId('alarm') // show alarm
   }
-  let startAlarm = () => {
-    console.log('Starting the alarm from app.js')
-  }
-  let stopAlarm = () => {
-    console.log('Stopping the alarm from app.js')
-  }
-
-  const display = pageId ? 'none' : 'flex'
 
   //    NOTIFICATIONS START
   const [game, setGame] = useState(0)
+  // eslint-disable-next-line no-unused-vars
   const [expoPushToken, setExpoPushToken] = useState('')
+  // eslint-disable-next-line no-unused-vars
   const [notification, setNotification] = useState(false)
   const notificationListener = useRef()
   const responseListener = useRef()
 
-  // Runs every time its re
+  // Runs every time its refreshed
   useEffect(() => {
     // Get token
     registerForPushNotificationsAsync().then((token) => setExpoPushToken(token))
@@ -61,11 +50,19 @@ export default function App() {
       Notifications.addNotificationResponseReceivedListener((response) => {
         // console.log(response)
         // console.log(response.notification.request.content.data.game)
-        console.log(
-          'Starting the game = ',
-          response.notification.request.content.data.game
-        )
-        // Set the game to play
+
+        // TODO stop notifications
+        // console.log('Cancelling all notifications')
+        cancelAllNotifications()
+
+        // TODO start the music
+
+        // console.log(
+        //   'Starting the game = ',
+        //   response.notification.request.content.data.game
+        // )
+
+        // Set the game to play from the notification argument
         setGame(response.notification.request.content.data.game)
         // Start/Show the game
         setPageId('games')
@@ -80,36 +77,15 @@ export default function App() {
   //    NOTIFICATIONS END
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'stretch',
-        width: 'auto',
-        backgroundColor: 'black'
-      }}
-    >
-      {/* In games page */}
+    <View style={styles.container}>
+      {pageId === 'alarm' && <AlarmList />}
+
       {pageId === 'games' && (
-        // User won the game
         <Games onWinCondition={gameFinished} game={game} />
       )}
-      {/* Redirect to alarm page */}
-      {pageId === 'alarm' && <Alarm />}
     </View>
   )
 }
-
-// const styles = StyleSheet.create({
-//   Button: {
-//     backgroundColor: '#999',
-//     width: 150,
-//     marginTop: 100,
-//     fontSize: 35,
-//     textAlign: 'center',
-//     paddingVertical: 20,
-//     marginHorizontal: '30%'
-//   }
-// })
 
 // Register with operating system to be allowed to send notifications
 async function registerForPushNotificationsAsync() {
@@ -129,7 +105,7 @@ async function registerForPushNotificationsAsync() {
     }
     // If permission is granted, save token from notification
     token = (await Notifications.getExpoPushTokenAsync()).data
-    console.log(token)
+    // console.log(token)
   } else {
     // User is not on a physical device
     alert('Must use physical device for Push Notifications')
@@ -147,3 +123,28 @@ async function registerForPushNotificationsAsync() {
 
   return token
 }
+
+async function cancelAllNotifications() {
+  await Notifications.cancelAllScheduledNotificationsAsync()
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'stretch',
+    width: 'auto',
+    backgroundColor: 'black'
+  }
+})
+
+// const styles = StyleSheet.create({
+//   Button: {
+//     backgroundColor: '#999',
+//     width: 150,
+//     marginTop: 100,
+//     fontSize: 35,
+//     textAlign: 'center',
+//     paddingVertical: 20,
+//     marginHorizontal: '30%'
+//   }
+// })
