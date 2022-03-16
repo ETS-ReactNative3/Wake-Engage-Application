@@ -5,7 +5,6 @@ import {
   Text,
   ScrollView,
   View,
-  Button,
   Platform,
   StyleSheet,
   Modal,
@@ -26,9 +25,9 @@ export default function Apps() {
   const [readytoSchedule, setReadytoSchedule] = useState(false)
   const [alarmNameInput, onChangeText] = React.useState('')
   const [modalVisible, setModalVisible] = useState(false)
-  const [alarms, setAlarms] = useState([])
+  let [alarms, setAlarms] = useState([])
 
-  const [selectedGame, setSelectedGame] = useState()
+  let [selectedGame, setSelectedGame] = useState()
   useEffect(() => {
     getAllNotifications()
   }, [])
@@ -67,7 +66,7 @@ export default function Apps() {
     showMode('date')
   }
   const showModal = () => {
-    this.selectedGame = 0
+    selectedGame = 0
     setModalVisible(true)
   }
 
@@ -96,16 +95,21 @@ export default function Apps() {
     var body = 'Rise and Shine!'
     var game = selectedGame
 
-    // Schedule main notification as ALARM
+    // Schedule MAIN notification as ALARM
     await schedulePushNotification(title, body, game, trigger, false) // sub false
 
     // Schedule the other notifications as sub-notifications
-    // TODO UNCOMMENT THIS
-    // for (var i = 2; i < 7; i += 2) {
-    //   // TODO change i < 60
-    //   trigger.setSeconds(i)
-    //   schedulePushNotification(title, body, game, trigger, true)
-    // }
+    let minuteRollOverAvailable = true
+    for (var i = 2; i < 60; i += 2) {
+      trigger.setSeconds(i)
+      schedulePushNotification(title, body, game, trigger, true)
+      if (i == 58 && minuteRollOverAvailable) {
+        minuteRollOverAvailable = false
+        trigger.setMinutes(trigger.getMinutes() + 1)
+        i = 0
+      }
+    }
+
     getAllNotifications()
     setDate(new Date(0))
     setMode('date')
@@ -114,7 +118,6 @@ export default function Apps() {
     setModalVisible(false)
   }
 
-  // TODO add a button to create an alarm for the next minute for testing and show purposes
   async function getAllNotifications() {
     setAlarms([])
     await setAlarms(await Notifications.getAllScheduledNotificationsAsync())
@@ -122,18 +125,27 @@ export default function Apps() {
   }
 
   async function deleteAlarmById(props) {
-    // TODO
-    console.log('Alarm list deleting:', props)
+    // console.log('Alarm list deleting:', props)
+    await alarms.map(async (alarm) => {
+      if (alarm.content.title === props.title) {
+        await Notifications.cancelScheduledNotificationAsync(alarm.identifier)
+      }
+    })
+
+    getAllNotifications()
+    setDate(new Date(0))
+    setMode('date')
+    setShow(false)
+    onChangeText('')
+    setModalVisible(false)
   }
 
-  async function cancelAllNotifications() {
-    await Notifications.cancelAllScheduledNotificationsAsync().then(() =>
-      console.log('Done deleting all notifications')
-    )
-  }
+  // async function cancelAllNotifications() {
+  //   await Notifications.cancelAllScheduledNotificationsAsync().then(() =>
+  //     console.log('Done deleting all notifications')
+  //   )
+  // }
 
-  // TODO Create a new variable mainAlarms and filter/update every time alarms is being updated
-  // TODO Create a finction that will erase from alarms all alarms with a specific data
   return (
     <>
       {/* <Text style={[styles.small]}>{date.toString()}</Text> */}
@@ -145,8 +157,8 @@ export default function Apps() {
 
       <ScrollView>
         <View style={styles.container}>
-          <Button title="Get all" onPress={getAllNotifications} />
-          <Button title="Cancell all" onPress={cancelAllNotifications} />
+          {/* <Button title="Get all" onPress={getAllNotifications} />
+          <Button title="Cancell all" onPress={cancelAllNotifications} /> */}
 
           {alarms.map(
             (SpecificAlarm, index) =>
@@ -231,11 +243,10 @@ export default function Apps() {
 }
 
 // Set the content for notification
-// TODO make game selectable from the Alarm.js
 async function schedulePushNotification(
   title,
   body,
-  SelectedGame,
+  selectedGame,
   secondsForDateForNotification,
   subNotification
 ) {
@@ -244,7 +255,7 @@ async function schedulePushNotification(
       title: title,
       body: body,
       data: {
-        game: SelectedGame,
+        game: selectedGame,
         sub: subNotification
       }
     },

@@ -14,14 +14,13 @@ Notifications.setNotificationHandler({
 })
 
 export default function App() {
-  // TODO Start playing a sound once App loads from a notification
   // If app opens naturally it will show the alarm component (GUI)
 
   const [pageId, setPageId] = useState('alarm') // or game
 
   let gameFinished = () => {
     // console.log('Resetting the app from app.js')
-    // TODO shut off the alarm/sound on the game is done
+
     setPageId('alarm') // show alarm
   }
 
@@ -47,26 +46,36 @@ export default function App() {
 
     // Every time we receive a notification this function runs (app opens from notification and game runs)
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        // console.log(response)
-        // console.log(response.notification.request.content.data.game)
+      Notifications.addNotificationResponseReceivedListener(
+        async (response) => {
+          // console.log(response.notification.request.content.data.game)
 
-        // TODO stop notifications
-        // console.log('Cancelling all notifications')
-        cancelAllNotifications()
+          await Notifications.getAllScheduledNotificationsAsync().map(
+            async (alarm) => {
+              if (
+                alarm.content.title ===
+                response.notification.request.content.title
+              ) {
+                await Notifications.cancelScheduledNotificationAsync(
+                  alarm.identifier
+                )
+              }
+            }
+          )
 
-        // TODO start the music
+          // Cancel the main notifications + all sub alarms (100 of them)
 
-        // console.log(
-        //   'Starting the game = ',
-        //   response.notification.request.content.data.game
-        // )
+          // console.log(
+          //   'Starting the game = ',
+          //   response.notification.request.content.data.game
+          // )
 
-        // Set the game to play from the notification argument
-        setGame(response.notification.request.content.data.game)
-        // Start/Show the game
-        setPageId('games')
-      })
+          // Set the game to play from the notification argument
+          setGame(response.notification.request.content.data.game)
+          // Start/Show the game
+          setPageId('games')
+        }
+      )
 
     return () => {
       // Stop app from listening in the background

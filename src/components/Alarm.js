@@ -1,16 +1,8 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Switch } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function App(props) {
-  const [isEnabled, setIsEnabled] = useState(false) // TODO get this status as a prop
-  const toggleSwitch = () => {
-    // console.log('toggled')
-    setIsEnabled((previousState) => !previousState)
-  }
-
-  //props.title
-
   let getPrintableDate = () => {
     return (
       props.date.toString().split(' ')[1] +
@@ -26,11 +18,10 @@ export default function App(props) {
     )
   }
 
-  let handlePress = () => {
-    console.log('pressed')
+  let handleDeleteAlarm = () => {
+    // tell our game that I have been pressed.
     props.onDelete(props)
     // console.warn(props.text)
-    // TODO tell our game that I have been pressed.
   }
 
   return (
@@ -39,7 +30,7 @@ export default function App(props) {
         <View style={[styles.topRow]}>
           <Text style={[styles.time]}>{getPrintableTime()}</Text>
           <Ionicons
-            onPress={handlePress}
+            onPress={handleDeleteAlarm}
             style={[styles.switch]}
             name="trash"
             size={25}
@@ -69,7 +60,6 @@ export default function App(props) {
   )
 }
 
-// TODO make random buttom width dymanic not 350!
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#262626',

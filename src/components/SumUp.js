@@ -28,8 +28,6 @@ export default function App(props) {
   )
   const [shuffledRandomNumbers] = useState(shuffle(randomNumbers))
 
-  // TODO: Shuffle the random numbers of the array (right now answer is always first 4)
-
   // Function that receives index of number pressed
   var isNumberSelected = (numberIndex) => {
     // If button is not in array, it will return false (button is not in selected numbers array)
