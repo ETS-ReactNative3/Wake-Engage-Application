@@ -1,11 +1,34 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import SumUp from './SumUp.js'
+import { Audio } from 'expo-av'
 
 export default function Apps(prop) {
-  // TODO read props.game and pick a game from that variable
-  // TODO Start playing a sound once App loads from a notification
-  // TODO start the music
+  const [sound, setSound] = React.useState()
+  const [isPlaying, setIsPlaying] = React.useState('Play from start')
+
+  async function playSound() {
+    console.log('Loading Sound')
+    const { sound } = await Audio.Sound.createAsync(
+      require('../../assets/audio/Alarm.mp3')
+    )
+
+    setSound(sound)
+
+    console.log('Playing Sound')
+    await sound.playAsync()
+  }
+
+  if (isPlaying === 'Play from start') {
+    setIsPlaying('playing')
+    playSound() //  Start playing a sound once App loads from a notification
+  }
+  async function stopSound() {
+    setIsPlaying('won')
+    console.log('Stopping Sound')
+    sound.unloadAsync()
+  }
+
   // gameId state starts at 0
   const [gameId, setGameId] = useState(0)
   // 0 = Show nothing
@@ -18,20 +41,10 @@ export default function Apps(prop) {
   }
   var gameWon = () => {
     // console.warn('WON the game')
-    // Hide the game
-    // TODO shut off the alarm/sound on the game is done
-    setShowGame(0) // will not show any game
-
-    // TODO STOP THE ALARM in the parent component
-    // this will run a funciton in app.js called resetTheApp
+    stopSound() //  shut off the alarm/sound on the game is done
+    setShowGame(0) // Hide the game, will not show any game
     prop.onWinCondition()
   }
-
-  // TODO PLAY THE MUSIC
-
-  // TODO SHOW THE SPECIFIC GAME
-
-  // Pass number of solutions to SumUp
   return (
     <View style={styles.fullPageContainer}>
       {showGame === '1' && (
@@ -57,8 +70,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    marginTop: 200,
-    height: 100,
+    marginTop: 50,
+    height: 50,
     color: 'black',
     backgroundColor: 'yellow'
   }

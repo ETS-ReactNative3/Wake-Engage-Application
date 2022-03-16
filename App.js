@@ -13,10 +13,19 @@ Notifications.setNotificationHandler({
   })
 })
 
+/*
+TODO 
+  1. Play the sound until the game WIN condition
+  2. Add more games
+  3. Firebase auth
+    3.1. Firebase leaderboard
+  5. Firebase friends
+
+*/
 export default function App() {
   // If app opens naturally it will show the alarm component (GUI)
 
-  const [pageId, setPageId] = useState('alarm') // or game
+  const [pageId, setPageId] = useState('alarm') // alarm by default or games
 
   let gameFinished = () => {
     // console.log('Resetting the app from app.js')
@@ -48,20 +57,17 @@ export default function App() {
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener(
         async (response) => {
-          // console.log(response.notification.request.content.data.game)
-
-          await Notifications.getAllScheduledNotificationsAsync().map(
-            async (alarm) => {
-              if (
-                alarm.content.title ===
-                response.notification.request.content.title
-              ) {
-                await Notifications.cancelScheduledNotificationAsync(
-                  alarm.identifier
-                )
-              }
+          let alarms = await Notifications.getAllScheduledNotificationsAsync()
+          await alarms.map(async (alarm) => {
+            if (
+              alarm.content.title ===
+              response.notification.request.content.title
+            ) {
+              await Notifications.cancelScheduledNotificationAsync(
+                alarm.identifier
+              )
             }
-          )
+          })
 
           // Cancel the main notifications + all sub alarms (100 of them)
 
@@ -131,10 +137,6 @@ async function registerForPushNotificationsAsync() {
   }
 
   return token
-}
-
-async function cancelAllNotifications() {
-  await Notifications.cancelAllScheduledNotificationsAsync()
 }
 
 const styles = StyleSheet.create({
