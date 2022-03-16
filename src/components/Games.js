@@ -22,7 +22,6 @@ export default function Apps(prop) {
     // TODO STOP THE ALARM in the parent component
     // this will run a funciton in app.js called resetTheApp
     prop.onWinCondition()
-
   }
 
   // TODO PLAY THE MUSIC
@@ -42,7 +41,8 @@ export default function Apps(prop) {
         />
       )}
 
-      {showGame === 2 && <Text>Game 2</Text>}
+      {showGame === 2 && <Text>Game 2 8-Puzzle</Text>}
+      {showGame === 3 && <Text>Game 3 The Simon Game</Text>}
     </View>
   )
 }

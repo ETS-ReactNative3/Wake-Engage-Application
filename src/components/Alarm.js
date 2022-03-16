@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Switch } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function App(props) {
-  // console.log('ALARM.js -> date2.toString', new Date(props.date2).toString())
-
   const [isEnabled, setIsEnabled] = useState(false) // TODO get this status as a prop
   const toggleSwitch = () => {
     // console.log('toggled')
@@ -29,24 +28,31 @@ export default function App(props) {
 
   let handlePress = () => {
     console.log('pressed')
-    props.onPress(props.id)
+    props.onDelete(props)
     // console.warn(props.text)
     // TODO tell our game that I have been pressed.
   }
 
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity onPress={toggleSwitch}>
+      <TouchableOpacity>
         <View style={[styles.topRow]}>
           <Text style={[styles.time]}>{getPrintableTime()}</Text>
-          <Switch
+          <Ionicons
+            onPress={handlePress}
+            style={[styles.switch]}
+            name="trash"
+            size={25}
+            color="#bfbfbf"
+          />
+          {/* <Switch
             style={[styles.switch]}
             trackColor={{ false: '#4d4d4d', true: '#7FFF00' }}
             thumbColor={isEnabled ? '#F8F8FF' : '#F8F8FF'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
-          />
+          /> */}
         </View>
 
         <View style={[styles.bottowRow]}>
@@ -66,7 +72,7 @@ export default function App(props) {
 // TODO make random buttom width dymanic not 350!
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'grey',
+    backgroundColor: '#262626',
     width: 380,
     marginBottom: 5,
     borderBottomLeftRadius: 20,
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     // textAlign: 'center',
     // alignItems: 'center',
-    color: 'white',
+    color: '#bfbfbf',
     fontSize: 15,
     paddingBottom: 10
   },
@@ -98,17 +104,19 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     paddingLeft: 15,
-    color: 'white',
+    color: '#bfbfbf',
     fontSize: 40
   },
   text: {
     alignContent: 'flex-start',
     paddingLeft: 10,
-    color: 'white',
+    color: '#bfbfbf',
     fontSize: 15,
     paddingBottom: 10
   },
   switch: {
+    marginRight: 10,
+    marginTop: 10,
     alignContent: 'flex-end'
   }
 })

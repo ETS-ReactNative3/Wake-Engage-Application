@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import {
+  Alert,
   Text,
   ScrollView,
   View,
@@ -9,10 +10,12 @@ import {
   StyleSheet,
   Modal,
   Pressable,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native'
 import * as Notifications from 'expo-notifications'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { Picker } from '@react-native-picker/picker'
 import Alarm from './Alarm.js'
 
 export default function Apps() {
@@ -25,6 +28,7 @@ export default function Apps() {
   const [modalVisible, setModalVisible] = useState(false)
   const [alarms, setAlarms] = useState([])
 
+  const [selectedGame, setSelectedGame] = useState()
   useEffect(() => {
     getAllNotifications()
   }, [])
@@ -88,8 +92,8 @@ export default function Apps() {
     // schedulePushNotification(trigger)
 
     var title = alarmNameInput
-    var body = 'some body'
-    var game = '1'
+    var body = 'Rise and Shine!'
+    var game = selectedGame
 
     // Schedule main notification as ALARM
     await schedulePushNotification(title, body, game, trigger, false) // sub false
@@ -116,11 +120,17 @@ export default function Apps() {
     console.log(alarms)
   }
 
+  async function deleteAlarmById(props) {
+    // TODO
+    console.log('Alarm list deleting:', props)
+  }
+
   async function cancelAllNotifications() {
     await Notifications.cancelAllScheduledNotificationsAsync().then(() =>
       console.log('Done deleting all notifications')
     )
   }
+
   // TODO Create a new variable mainAlarms and filter/update every time alarms is being updated
   // TODO Create a finction that will erase from alarms all alarms with a specific data
   return (
@@ -147,6 +157,7 @@ export default function Apps() {
                   date2={SpecificAlarm.trigger.value}
                   game={SpecificAlarm.content.data.game}
                   body={SpecificAlarm.content.body}
+                  onDelete={deleteAlarmById}
                 ></Alarm>
               )
           )}
@@ -176,11 +187,28 @@ export default function Apps() {
                 value={alarmNameInput}
               />
 
+              <TouchableOpacity style={[styles.button, styles.buttonClose]}>
+                <Picker
+                  style={{ height: 30, width: 280 }}
+                  selectedValue={selectedGame}
+                  onValueChange={(itemValue) => setSelectedGame(itemValue)}
+                >
+                  <Picker.Item label="Please select a game..." value="0" />
+                  <Picker.Item label="Sum-Up" value="1" />
+                  <Picker.Item label="8-Puzzle" value="2" />
+                  <Picker.Item label="The Simon Game" value="3" />
+                </Picker>
+              </TouchableOpacity>
+
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
-                  setModalVisible(!modalVisible)
-                  addAlarm()
+                  if (selectedGame === 0 || selectedGame === undefined) {
+                    Alert.alert('Please select a game', '', [{ text: 'OK' }])
+                  } else {
+                    setModalVisible(!modalVisible)
+                    addAlarm()
+                  }
                 }}
               >
                 <Text style={styles.textStyle}>Next</Text>
@@ -188,7 +216,7 @@ export default function Apps() {
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
-                  setModalVisible(!modalVisible)
+                  setModalVisible(false)
                 }}
               >
                 <Text style={styles.textStyle}>Cancel</Text>
@@ -249,7 +277,8 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
+    marginBottom: 20
   },
   buttonOpen: {
     backgroundColor: '#F194FF'
