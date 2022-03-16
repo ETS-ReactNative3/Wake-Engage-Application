@@ -67,6 +67,7 @@ export default function Apps() {
     showMode('date')
   }
   const showModal = () => {
+    this.selectedGame = 0
     setModalVisible(true)
   }
 
