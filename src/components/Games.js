@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import SumUp from './SumUp.js'
+import Simon from './Simon/Simon.js'
 import { Audio } from 'expo-av'
 
 export default function Apps(prop) {
   const [sound, setSound] = React.useState()
-  const [isPlaying, setIsPlaying] = React.useState('Play from start')
+  const [isPlaying, setIsPlaying] = React.useState('Play from start2') //  TODO put back as 'Play from start'
 
   async function playSound() {
     console.log('Loading Sound')
@@ -58,9 +59,9 @@ export default function Apps(prop) {
       )}
 
       {showGame === '2' && <Text style={styles.text}>Game 2 8-Puzzle</Text>}
-      {showGame === '3' && (
-        <Text style={styles.text}>Game 3 The Simon Game</Text>
-      )}
+      {/* {showGame === '3' && <Text style={styles.text}>Game 3 active</Text>} */}
+
+      {showGame === '3' && <Simon />}
     </View>
   )
 }
