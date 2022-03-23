@@ -17,6 +17,7 @@ export default function Apps(prop) {
     setSound(sound)
 
     console.log('Playing Sound')
+    await sound.setIsLoopingAsync(true)
     await sound.playAsync()
   }
 
