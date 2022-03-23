@@ -6,7 +6,7 @@ import { Audio } from 'expo-av'
 
 export default function Apps(prop) {
   const [sound, setSound] = React.useState()
-  const [isPlaying, setIsPlaying] = React.useState('Play from start2') //  TODO put back as 'Play from start'
+  const [isPlaying, setIsPlaying] = React.useState('Play from start')
 
   async function playSound() {
     console.log('Loading Sound')

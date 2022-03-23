@@ -7,14 +7,24 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback
 } from 'react-native'
+import shuffle from 'lodash.shuffle'
 import { Audio } from 'expo-av'
 
-export default function App() {
+export default function App(props) {
   // console.log(props.gameId)
   // props.onPlayAgain
   // props.onWinCondition
 
   const [sound, setSound] = useState()
+
+  const playCountdown = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require('../../assets/audio/countdown.wav')
+    )
+    setSound(sound)
+    // Start the sound
+    sound.playAsync()
+  }
 
   // RED BUTTON
   // fadeAnim will be used as the value for opacity. Initial Value: 0
@@ -115,11 +125,6 @@ export default function App() {
     })
   }
   // GREEN BUTTON END
-
-  const registerButton = (buttonColor) => {
-    console.log(buttonColor, ' pressed')
-  }
-
   // When the sound finished playing remove it from the sound variable.
   React.useEffect(() => {
     return sound
@@ -129,20 +134,123 @@ export default function App() {
       : undefined
   }, [sound])
 
-  // Starting game logic
-  const startGame = () => {
-    // TODO Play the sounds in the solution order
-    let solution = ['Yellow', 'Blue', 'Red', 'Green']
-    // solution.map()
-    // setTimeout(animateRed(), 3000)
-    // setTimeout(animateBlue(), 2000)
+  function wait() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('resolved')
+      }, 800)
+    })
   }
-  startGame()
+  function wait4() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('resolved')
+      }, 5000)
+    })
+  }
+  ///////////////////////////////////////// GAME LOGIC
+
+  const registerButton = (buttonColor) => {
+    // console.log(buttonColor, ' pressed')
+    setUserInputArray((oldArray) => [...oldArray, buttonColor])
+  }
+
+  // Every time userInputArray changes check win condition
+  React.useEffect(async () => {
+    // console.log('userInputArray was updated to ', userInputArray)
+    // If won or lost no need to recalculate
+    if (gameCondition === 'PLAYING') {
+      // console.log('Checking game condition')
+      gameCondition = checkGameWinCondition()
+      // console.log('new gameCondition', gameCondition)
+    }
+  }, [[userInputArray]])
+
+  // Starting game logic
+  const [userInputArray, setUserInputArray] = useState([])
+  // setUserInputArray(oldArray => [...oldArray,newValue] ); add at the end
+  // setUserInputArray(oldArray => [newValue,...oldArray] ); add at the beginning
+  const [solution] = useState(
+    shuffle(['Yellow', 'Blue', 'Red', 'Green', 'Yellow', 'Blue'])
+  )
+  console.log('solution', solution)
+
+  const startGame = async () => {
+    playCountdown()
+    await wait4()
+    for (let i = 0; i < solution.length; i++) {
+      if (solution[i] == 'Yellow') {
+        // console.log('Playing yellow')
+        animateYellow()
+      } else if (solution[i] == 'Blue') {
+        // console.log('Playing blue')
+        animateBlue()
+      } else if (solution[i] == 'Red') {
+        // console.log('Playing red')
+        animateRed()
+      } else if (solution[i] == 'Green') {
+        // console.log('Playing green')
+        animateGreen()
+      }
+      await wait()
+    }
+  }
+
+  const [startGameOnce, setstartGameOnce] = useState(true)
+  if (startGameOnce) {
+    setstartGameOnce(false)
+    startGame()
+  }
+
+  // Compare userInputArray with the solution array
+  // const [gameCondition, setGameCondition] = useState('PLAYING') // PLAYING WON LOST
+  // let gameCondition = 'PLAYING'
+  // console.log('\n\nResetting PLAYING CONDITION')
+  var checkGameWinCondition = () => {
+    // await wait()
+    // console.log('userInputArray', userInputArray)
+    // console.log('solution', solution)
+    for (let i = 0; i < solution.length; i++) {
+      if (userInputArray[i]) {
+        if (userInputArray[i] == solution[i]) {
+          // console.log(i, ' the same')
+          if (i === solution.length - 1) {
+            // console.log('WON - KILL THE GAME')
+            return 'WON'
+          }
+        } else {
+          // TODO RESTART GAME
+          // console.log('\nLOST = RESTARTING THE GAME')
+          return 'LOST'
+          // SHow the restart game UI / Button
+
+          // console.log('solution[i]>', solution[i], '<')
+          // console.log('userInputArray[i]>', userInputArray[i], '<')
+        }
+      } else {
+        return 'PLAYING'
+      }
+    }
+  }
+
+  var gameCondition = checkGameWinCondition()
+  // console.log('\nGame condition 214', gameCondition)
 
   return (
     // Button will light up on-press with the passed props text
     <>
       <Text style={[styles.heading]}>Repeat the pattern!</Text>
+      {gameCondition === 'LOST' && (
+        <Text style={[styles.playAgainButton]} onPress={props.onPlayAgain}>
+          Play again
+        </Text>
+      )}
+      {gameCondition === 'WON' && (
+        <Text style={[styles.playAgainButton]} onPress={props.onWinCondition}>
+          SHUT THIS SONG OFF
+        </Text>
+      )}
+
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback
           onPress={() => {
@@ -251,5 +359,13 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 20,
     fontSize: 30
+  },
+  playAgainButton: {
+    marginTop: '70%',
+    height: '90%',
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 30,
+    textAlign: 'center'
   }
 })

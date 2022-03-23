@@ -24,7 +24,7 @@ TODO
 export default function App() {
   // If app opens naturally it will show the alarm component (GUI)
 
-  const [pageId, setPageId] = useState('games') // alarm by default or games
+  const [pageId, setPageId] = useState('alarm') // TODO alarm by default or games
 
   let gameFinished = () => {
     // console.log('Resetting the app from app.js')
@@ -33,7 +33,7 @@ export default function App() {
   }
 
   //    NOTIFICATIONS START
-  const [game, setGame] = useState('3') // '0' default
+  const [game, setGame] = useState('0') // TODO '0' default
   // eslint-disable-next-line no-unused-vars
   const [expoPushToken, setExpoPushToken] = useState('')
   // eslint-disable-next-line no-unused-vars
