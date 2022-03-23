@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import SumUp from './SumUp.js'
-import Simon from './Simon/Simon.js'
+import Simon from './Simon.js'
 import { Audio } from 'expo-av'
 
 export default function Apps(prop) {
@@ -37,7 +37,7 @@ export default function Apps(prop) {
   const [showGame, setShowGame] = useState(prop.game)
   // console.log(showGame)
   // Increment gameID
-  var restartTheSumUpGame = () => {
+  var restartTheGame = () => {
     setGameId(gameId + 1)
   }
   var gameWon = () => {
@@ -52,7 +52,7 @@ export default function Apps(prop) {
         <SumUp
           // Every time key changes the component will get re-rendered
           key={gameId}
-          onPlayAgain={restartTheSumUpGame}
+          onPlayAgain={restartTheGame}
           onWinCondition={gameWon}
           numberOfOptionButtons={'6'}
         />
@@ -61,7 +61,13 @@ export default function Apps(prop) {
       {showGame === '2' && <Text style={styles.text}>Game 2 8-Puzzle</Text>}
       {/* {showGame === '3' && <Text style={styles.text}>Game 3 active</Text>} */}
 
-      {showGame === '3' && <Simon />}
+      {showGame === '3' && (
+        <Simon
+          key={gameId}
+          onPlayAgain={restartTheGame}
+          onWinCondition={gameWon}
+        />
+      )}
     </View>
   )
 }

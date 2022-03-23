@@ -15,7 +15,6 @@ Notifications.setNotificationHandler({
 
 /*
 TODO 
-  1. Play the sound until the game WIN condition
   2. Add more games
   3. Firebase auth
     3.1. Firebase leaderboard
@@ -25,7 +24,7 @@ TODO
 export default function App() {
   // If app opens naturally it will show the alarm component (GUI)
 
-  const [pageId, setPageId] = useState('alarm') // alarm by default or games
+  const [pageId, setPageId] = useState('games') // alarm by default or games
 
   let gameFinished = () => {
     // console.log('Resetting the app from app.js')
@@ -34,7 +33,7 @@ export default function App() {
   }
 
   //    NOTIFICATIONS START
-  const [game, setGame] = useState(0)
+  const [game, setGame] = useState('3') // '0' default
   // eslint-disable-next-line no-unused-vars
   const [expoPushToken, setExpoPushToken] = useState('')
   // eslint-disable-next-line no-unused-vars

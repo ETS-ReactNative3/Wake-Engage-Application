@@ -1,16 +1,15 @@
 /* eslint-disable indent */
 import React, { useRef, useState } from 'react'
 import {
+  Text,
   Animated,
-  View,
   StyleSheet,
-  Button,
   SafeAreaView,
   TouchableWithoutFeedback
 } from 'react-native'
 import { Audio } from 'expo-av'
 
-export default function App(props) {
+export default function App() {
   // console.log(props.gameId)
   // props.onPlayAgain
   // props.onWinCondition
@@ -130,9 +129,20 @@ export default function App(props) {
       : undefined
   }, [sound])
 
+  // Starting game logic
+  const startGame = () => {
+    // TODO Play the sounds in the solution order
+    let solution = ['Yellow', 'Blue', 'Red', 'Green']
+    // solution.map()
+    // setTimeout(animateRed(), 3000)
+    // setTimeout(animateBlue(), 2000)
+  }
+  startGame()
+
   return (
     // Button will light up on-press with the passed props text
     <>
+      <Text style={[styles.heading]}>Repeat the pattern!</Text>
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback
           onPress={() => {
@@ -145,6 +155,7 @@ export default function App(props) {
               styles.fadingContainer,
               {
                 // Bind opacity to animated value
+                backgroundColor: 'yellow',
                 opacity: fadeAnimYellow
               }
             ]}
@@ -154,7 +165,7 @@ export default function App(props) {
         <TouchableWithoutFeedback
           onPress={() => {
             animateBlue()
-            registerButton('Glue')
+            registerButton('Blue')
           }}
         >
           <Animated.View
@@ -162,6 +173,7 @@ export default function App(props) {
               styles.fadingContainer,
               {
                 // Bind opacity to animated value
+                backgroundColor: 'blue',
                 opacity: fadeAnimBlue
               }
             ]}
@@ -179,6 +191,7 @@ export default function App(props) {
               styles.fadingContainer,
               {
                 // Bind opacity to animated value
+                backgroundColor: 'red',
                 opacity: fadeAnimRed
                 // 'background-color': rgb(fadeAnim, 0, 0)
               }
@@ -197,6 +210,7 @@ export default function App(props) {
               styles.fadingContainer,
               {
                 // Bind opacity to animated value
+                backgroundColor: 'green',
                 opacity: fadeAnimGreen
               }
             ]}
@@ -217,8 +231,8 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: 'pink',
-    marginTop: 50,
+    // backgroundColor: 'pink',
+    // marginTop: 50,
     flex: 1,
     minHeight: '40%',
     display: 'flex',
@@ -227,11 +241,15 @@ const styles = StyleSheet.create({
   },
   fadingContainer: {
     width: '50%',
-    height: '50%',
-    backgroundColor: 'yellow'
+    height: '50%'
   },
   buttonRow: {
     // flexBasis: 100,
     marginVertical: 16
+  },
+  heading: {
+    color: 'white',
+    marginTop: 20,
+    fontSize: 30
   }
 })
