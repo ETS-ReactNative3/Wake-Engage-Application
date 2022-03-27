@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function App(props) {
-  //props.text
+  // props.text
 
   let handlePress = () => {
     if (props.isDisabled) {
@@ -19,12 +19,14 @@ export default function App(props) {
       {/* Button styling (disabled or active) */}
       <Text
         style={[
-          styles.randomButton,
+          !props.small && styles.randomButton,
           props.isDisabled && styles.disabled,
-          props.isPlayAgain && styles.isPlayAgain
+          props.isPlayAgain && styles.isPlayAgain,
+          props.small && styles.smallButton,
+          props.text === null && styles.nullButton
         ]}
       >
-        {props.text}
+        {props.text || 'DEF'}
       </Text>
     </TouchableOpacity>
   )
@@ -46,5 +48,20 @@ const styles = StyleSheet.create({
   isPlayAgain: {
     backgroundColor: 'red',
     width: 400
+  },
+  smallButton: {
+    backgroundColor: '#999',
+    width: 100,
+    marginHorizontal: 15,
+    marginVertical: 25,
+    fontSize: 35,
+    textAlign: 'center',
+    paddingVertical: 30
+  },
+  nullButton: {
+    backgroundColor: 'transparent',
+    color: 'transparent',
+    borderColor: 'red',
+    borderWidth: 2
   }
 })

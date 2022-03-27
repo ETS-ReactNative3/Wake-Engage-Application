@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import SumUp from './SumUp.js'
 import Simon from './Simon.js'
+import Puzzle from './8Puzzle.js'
 import { Audio } from 'expo-av'
 
 export default function Apps(prop) {
@@ -67,6 +68,15 @@ export default function Apps(prop) {
           key={gameId}
           onPlayAgain={restartTheGame}
           onWinCondition={gameWon}
+        />
+      )}
+
+      {showGame === '4' && (
+        <Puzzle
+          key={gameId}
+          onPlayAgain={restartTheGame}
+          onWinCondition={gameWon}
+          numberOfOptionButtons={'9'} // TODO delete this line later
         />
       )}
     </View>

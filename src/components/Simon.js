@@ -219,7 +219,6 @@ export default function App(props) {
             return 'WON'
           }
         } else {
-          // TODO RESTART GAME
           // console.log('\nLOST = RESTARTING THE GAME')
           return 'LOST'
           // SHow the restart game UI / Button
