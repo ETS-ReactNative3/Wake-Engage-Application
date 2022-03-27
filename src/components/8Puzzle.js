@@ -106,7 +106,6 @@ export default function App(props) {
     // }
   }
 
-  // TODO make this function change the tiles array
   var moveTile = (tileIndex) => {
     // Check left from item clicked
     if (

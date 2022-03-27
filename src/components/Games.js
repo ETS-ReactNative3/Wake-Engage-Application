@@ -60,23 +60,19 @@ export default function Apps(prop) {
         />
       )}
 
-      {showGame === '2' && <Text style={styles.text}>Game 2 8-Puzzle</Text>}
-      {/* {showGame === '3' && <Text style={styles.text}>Game 3 active</Text>} */}
-
-      {showGame === '3' && (
-        <Simon
+      {showGame === '2' && (
+        <Puzzle
           key={gameId}
           onPlayAgain={restartTheGame}
           onWinCondition={gameWon}
         />
       )}
 
-      {showGame === '4' && (
-        <Puzzle
+      {showGame === '3' && (
+        <Simon
           key={gameId}
           onPlayAgain={restartTheGame}
           onWinCondition={gameWon}
-          numberOfOptionButtons={'9'} // TODO delete this line later
         />
       )}
     </View>
