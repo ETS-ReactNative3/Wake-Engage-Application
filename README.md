@@ -1,22 +1,38 @@
-<p align="center"><a  rel="noopener noreferrer"><img width="200" src="https://github.com/bernadetteveni/Wake-Engage-Application/blob/828c5d18599193b189bd55ea4641dc7778b23a38/assets/Logo.png?raw=true" alt="Wake Engage logo"></a></p>
-
-
-
-<p align="center"><img src="https://img.shields.io/badge/version -v0.1.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/dependencies-out%20of%20date-orange" alt="expo" style="max-width: 100%;"></a>
-
-
-# Wake Engage
-## Configuration instructions
+<h1 align="center">
+    <br>
+    <a  rel="noopener noreferrer"><img width="200" src="https://github.com/bernadetteveni/Wake-Engage-Application/blob/828c5d18599193b189bd55ea4641dc7778b23a38/assets/Logo.png?raw=true" alt="Wake Engage logo"></a>
+    <br>
+    Wake Engage
+    <br>
+</h1>
+<p align="center"><img src="https://img.shields.io/badge/version -v1.0.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/dependencies-out%20of%20date-orange" alt="expo" style="max-width: 100%;"></a>
 
 ## Installation instructions:
 
-git clone https://github.com/bernadetteveni/Wake-Engage-Application.git
-cd Wake-Engage-Application
-yarn install
-yarn start or yarn start –ios
+1. <a href="https://docs.expo.dev/get-started/installation/">Follow EXPO Install page for your machine</a>
+2. `git clone https://github.com/bernadetteveni/Wake-Engage-Application`
+3. `cd Wake-Engage-Application/`
+4. `yarn install`
+5. `yarn start ` or `yarn ios` or `yarn web` or
+6. Optional `yarn devtools` for debugging
+
+## Configuration instructions
+
+There are no major config options with exception of app.json, Babel, prettier and eslint all of which are personal taste configuration options.
 
 ## Operating instructions
 
+There are many ways to start the application:
+
+1. `yarn start`
+2. `yarn ios`
+3. `yarn android`
+4. `yarn web`
+5. `yarn eject`
+
+Once the server is runnin you may open the EXPO andeoid app to test i
+t on your phone. 
+Note: Notification system only works on ANDROIS OS. 
 ## A manifest (list of files)
 
 ## Copyright information
