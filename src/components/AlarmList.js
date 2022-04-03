@@ -16,6 +16,7 @@ import * as Notifications from 'expo-notifications'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { Picker } from '@react-native-picker/picker'
 import Alarm from './Alarm.js'
+import { DataTable } from 'react-native-paper'
 
 export default function Apps() {
   // DateTime
@@ -70,26 +71,10 @@ export default function Apps() {
     setModalVisible(true)
   }
 
-  // + -> addAlarm -> mode-date -> mode-time -> setSetAlarm(true)
-  // END DateTime
-
-  // var games = [1, 2, 3, 4] // all available game names which we can show in Games.js
-  // Pick a game to play on the alarm or set it to random
-  // Pick a time for a notification
-  // Set notification
-
   let scheduleNotification = async () => {
     const trigger = new Date(date)
-    trigger.setSeconds(0) // Firat notification will go off at 0 seconds
+    trigger.setSeconds(0) // First notification will go off at 0 seconds
     console.log('Scheduling notification for (TO STRING): ', trigger.toString())
-
-    // const trigger = new Date(Date.now()) // + 60 * 60 * 1000 +1hour
-    // trigger.setHours(17)
-    // trigger.setMinutes(50)
-    // console.log('Scheduling an alarm for:', trigger.toString())
-    // schedulePushNotification(trigger)
-    // schedulePushNotification({ seconds: 2 })
-    // schedulePushNotification(trigger)
 
     var title = alarmNameInput
     var body = 'Rise and Shine!'
@@ -140,16 +125,8 @@ export default function Apps() {
     setModalVisible(false)
   }
 
-  // async function cancelAllNotifications() {
-  //   await Notifications.cancelAllScheduledNotificationsAsync().then(() =>
-  //     console.log('Done deleting all notifications')
-  //   )
-  // }
-
   return (
     <>
-      {/* <Text style={[styles.small]}>{date.toString()}</Text> */}
-
       <Text style={[styles.heading]}>Alarms</Text>
       <Text style={[styles.footer]} onPress={showModal}>
         +
@@ -157,9 +134,6 @@ export default function Apps() {
 
       <ScrollView>
         <View style={styles.container}>
-          {/* <Button title="Get all" onPress={getAllNotifications} />
-          <Button title="Cancell all" onPress={cancelAllNotifications} /> */}
-
           {alarms.map(
             (SpecificAlarm, index) =>
               !SpecificAlarm.content.data.sub && (
@@ -193,7 +167,7 @@ export default function Apps() {
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={[styles.modalHeading]}>Your Alarm name:</Text>
+              <Text style={[styles.modalHeading]}>Alarm Description:</Text>
               <TextInput
                 style={styles.textInput}
                 onChangeText={onChangeText}
@@ -212,28 +186,29 @@ export default function Apps() {
                   <Picker.Item label="The Simon Game" value="3" />
                 </Picker>
               </TouchableOpacity>
-
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  if (selectedGame === 0 || selectedGame === undefined) {
-                    Alert.alert('Please select a game', '', [{ text: 'OK' }])
-                  } else {
-                    setModalVisible(!modalVisible)
-                    addAlarm()
-                  }
-                }}
-              >
-                <Text style={styles.textStyle}>Next</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setModalVisible(false)
-                }}
-              >
-                <Text style={styles.textStyle}>Cancel</Text>
-              </Pressable>
+              <DataTable.Row>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    if (selectedGame === 0 || selectedGame === undefined) {
+                      Alert.alert('Please select a game', '', [{ text: 'OK' }])
+                    } else {
+                      setModalVisible(!modalVisible)
+                      addAlarm()
+                    }
+                  }}
+                >
+                  <Text style={styles.textStyle}>Next</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setModalVisible(false)
+                  }}
+                >
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </Pressable>
+              </DataTable.Row>
             </View>
           </View>
         </Modal>
@@ -268,7 +243,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-    // marginTop: 22
   },
   modalView: {
     width: '100%',
@@ -311,14 +285,12 @@ const styles = StyleSheet.create({
     zIndex: 1,
     color: 'white',
     fontSize: 20
-    // width: '100%',
   },
   container: {
     flex: 1,
     width: 'auto',
     alignItems: 'center',
     paddingTop: 110
-    // justifyContent: 'space-around'
   },
   heading: {
     backgroundColor: 'black',
@@ -343,17 +315,13 @@ const styles = StyleSheet.create({
     zIndex: 1,
     color: 'white',
     fontSize: 40,
-    // paddingBottom: 15,
-    // paddingLeft: 10,
-    bottom: 10,
+    bottom: 25,
     right: 10,
-    paddingHorizontal: 15,
-    // width: '100%',
+    paddingVertical: 5,
+    paddingHorizontal: 20,
     position: 'absolute',
-    borderBottomLeftRadius: 200,
-    borderBottomRightRadius: 200,
-    borderTopLeftRadius: 200,
-    borderTopRightRadius: 200
+    borderRadius: 30,
+    overflow: 'hidden'
   },
   textInput: {
     backgroundColor: '#2673bf',

@@ -21,7 +21,8 @@ export default function App(props) {
         style={[
           !props.small && styles.randomButton,
           props.isDisabled && styles.disabled,
-          props.isPlayAgain && styles.isPlayAgain,
+          props.isPlayAgainLose && styles.isPlayAgainLose,
+          props.isPlayAgainWon && styles.isPlayAgainWon,
           props.small && styles.smallButton,
           props.text === null && styles.nullButton
         ]}
@@ -34,23 +35,31 @@ export default function App(props) {
 
 const styles = StyleSheet.create({
   randomButton: {
-    backgroundColor: '#999',
+    backgroundColor: '#4B0082',
+    opacity: 0.9,
     width: 150,
     marginHorizontal: 15,
     marginVertical: 25,
-    fontSize: 35,
+    fontSize: 40,
+    color: 'white',
     textAlign: 'center',
     paddingVertical: 20
   },
   disabled: {
     opacity: 0.3
   },
-  isPlayAgain: {
+  isPlayAgainLose: {
     backgroundColor: 'red',
     width: 400
   },
+  isPlayAgainWon: {
+    backgroundColor: '#33d633',
+    width: 400
+  },
   smallButton: {
-    backgroundColor: '#999',
+    backgroundColor: '#4B0082',
+    opacity: 0.9,
+    color: 'white',
     width: 100,
     marginHorizontal: 15,
     marginVertical: 25,
@@ -61,7 +70,7 @@ const styles = StyleSheet.create({
   nullButton: {
     backgroundColor: 'transparent',
     color: 'transparent',
-    borderColor: 'red',
+    borderColor: 'yellow',
     borderWidth: 2
   }
 })

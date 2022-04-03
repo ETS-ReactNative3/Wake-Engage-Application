@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import SumUp from './SumUp.js'
 import Simon from './Simon.js'
 import Puzzle from './8Puzzle.js'
@@ -82,11 +82,5 @@ export default function Apps(prop) {
 const styles = StyleSheet.create({
   fullPageContainer: {
     flex: 1
-  },
-  text: {
-    marginTop: 50,
-    height: 50,
-    color: 'black',
-    backgroundColor: 'yellow'
   }
 })

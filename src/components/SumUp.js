@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 import shuffle from 'lodash.shuffle'
 import MyButton from './Button.js'
 
@@ -11,7 +11,6 @@ export default function App(props) {
   })
 
   // Create an array of size from a prop and map each int to a random number
-  // randomNumbers [7,11,13,15,8,1]
   const [randomNumbers] = useState(
     Array.from({ length: props.numberOfOptionButtons }).map(
       () => 1 + Math.floor(10 * Math.random())
@@ -58,69 +57,83 @@ export default function App(props) {
   }
 
   var gameStatus = CalculateGameStatus()
-
   return (
-    <View style={styles.fullPageContainer}>
-      {/* compute the style for the text based on the game status */}
-      <Text style={[styles.target, styles[`STATUS_${gameStatus}`]]}>
-        {target}
-      </Text>
+    <>
+      <Text style={[styles.heading]}>Sum up the numbers!</Text>
+      <ImageBackground
+        source={require('../../assets/AppBackground.jpg')}
+        style={{ flex: 1, width: null, height: null }}
+      >
+        <View style={styles.fullPageContainer}>
+          {/* compute the style for the text based on the game status */}
+          <Text style={[styles.target, styles[`STATUS_${gameStatus}`]]}>
+            {target}
+          </Text>
 
-      <View style={styles.randomButtonsContainer}>
-        {
-          // Prints every item in the random numbers array
-          shuffledRandomNumbers.map((buttonNumberText, index) => (
-            <MyButton
-              id={index}
-              key={index}
-              text={buttonNumberText}
-              isDisabled={isNumberSelected(index) || gameStatus !== 'PLAYING'}
-              onPress={selectNumber}
-            ></MyButton>
-          ))
-        }
-        {
-          // if a user has won/lost the game, they will have the option to Play Again
-          gameStatus === 'LOST' && (
-            <MyButton
-              text={'Play Again'}
-              onPress={props.onPlayAgain}
-              isPlayAgain={true}
-            ></MyButton>
-          )
-        }
-        {
-          // if a user has won/lost the game, they will have the option to Play Again
-          gameStatus === 'WON' && (
-            <MyButton
-              text={'Shut this song off!'}
-              onPress={props.onWinCondition}
-              isPlayAgain={true}
-            ></MyButton>
-          )
-        }
-      </View>
-    </View>
+          <View style={styles.randomButtonsContainer}>
+            {
+              // Prints every item in the random numbers array
+              shuffledRandomNumbers.map((buttonNumberText, index) => (
+                <MyButton
+                  id={index}
+                  key={index}
+                  text={buttonNumberText}
+                  isDisabled={
+                    isNumberSelected(index) || gameStatus !== 'PLAYING'
+                  }
+                  onPress={selectNumber}
+                ></MyButton>
+              ))
+            }
+            {
+              // if a user has won/lost the game, they will have the option to Play Again
+              gameStatus === 'LOST' && (
+                <MyButton
+                  text={'Play Again'}
+                  onPress={props.onPlayAgain}
+                  isPlayAgainLose={true}
+                ></MyButton>
+              )
+            }
+            {
+              // if a user has won/lost the game, they will have the option to Play Again
+              gameStatus === 'WON' && (
+                <MyButton
+                  text={'Shut off the alarm!'}
+                  onPress={props.onWinCondition}
+                  isPlayAgainWon={true}
+                ></MyButton>
+              )
+            }
+          </View>
+        </View>
+      </ImageBackground>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   fullPageContainer: {
-    backgroundColor: 'lightblue',
-    flex: 1
+    flex: 1,
+    height: '90%'
   },
   target: {
     fontSize: 42,
+    color: 'black',
     backgroundColor: 'yellow',
     width: '100%',
-    marginTop: 100,
-    marginBottom: 40,
+    marginTop: 15,
     textAlign: 'center',
-    paddingVertical: 20
+    paddingVertical: 15
+  },
+  heading: {
+    color: 'white',
+    marginTop: 25,
+    fontSize: 30
   },
   playAgainButton: {
-    paddingBottom: 200,
-    backgroundColor: 'yellow'
+    backgroundColor: 'yellow',
+    marginBottom: 0
   },
   randomButtonsContainer: {
     flex: 1,
@@ -132,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow'
   },
   STATUS_WON: {
-    backgroundColor: 'green'
+    backgroundColor: '#33d633'
   },
   STATUS_LOST: {
     backgroundColor: 'red'

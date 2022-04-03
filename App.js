@@ -13,16 +13,8 @@ Notifications.setNotificationHandler({
   })
 })
 
-/*
-TODO 
-  3. Firebase auth
-    3.1. Firebase leaderboard
-  5. Firebase friends
-
-*/
 export default function App() {
   // If app opens naturally it will show the alarm component (GUI)
-
   const [pageId, setPageId] = useState('alarm') // alarm by default or games
 
   let gameFinished = () => {
@@ -64,14 +56,6 @@ export default function App() {
               )
             }
           })
-
-          // Cancel the main notifications + all sub alarms (100 of them)
-
-          // console.log(
-          //   'Starting the game = ',
-          //   response.notification.request.content.data.game
-          // )
-
           // Set the game to play from the notification argument
           setGame(response.notification.request.content.data.game)
           // Start/Show the game
@@ -143,15 +127,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   }
 })
-
-// const styles = StyleSheet.create({
-//   Button: {
-//     backgroundColor: '#999',
-//     width: 150,
-//     marginTop: 100,
-//     fontSize: 35,
-//     textAlign: 'center',
-//     paddingVertical: 20,
-//     marginHorizontal: '30%'
-//   }
-// })

@@ -5,16 +5,14 @@ import {
   Animated,
   StyleSheet,
   SafeAreaView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ImageBackground,
+  View
 } from 'react-native'
 import shuffle from 'lodash.shuffle'
 import { Audio } from 'expo-av'
 
 export default function App(props) {
-  // console.log(props.gameId)
-  // props.onPlayAgain
-  // props.onWinCondition
-
   const [sound, setSound] = useState()
 
   const playCountdown = async () => {
@@ -28,7 +26,7 @@ export default function App(props) {
 
   // RED BUTTON
   // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnimRed = useRef(new Animated.Value(0.2)).current
+  const fadeAnimRed = useRef(new Animated.Value(0.4)).current
   const animateRed = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require('../../assets/audio/f-4.mp3')
@@ -43,7 +41,7 @@ export default function App(props) {
       useNativeDriver: true
     }).start(() => {
       Animated.timing(fadeAnimRed, {
-        toValue: 0.2,
+        toValue: 0.4,
         duration: 500,
         useNativeDriver: true
       }).start()
@@ -53,7 +51,7 @@ export default function App(props) {
 
   // YELLOW BUTTON
   // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnimYellow = useRef(new Animated.Value(0.2)).current
+  const fadeAnimYellow = useRef(new Animated.Value(0.4)).current
   const animateYellow = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require('../../assets/audio/d4.mp3')
@@ -68,7 +66,7 @@ export default function App(props) {
       useNativeDriver: true
     }).start(() => {
       Animated.timing(fadeAnimYellow, {
-        toValue: 0.2,
+        toValue: 0.4,
         duration: 500,
         useNativeDriver: true
       }).start()
@@ -78,7 +76,7 @@ export default function App(props) {
 
   // BLUE BUTTON
   // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnimBlue = useRef(new Animated.Value(0.2)).current
+  const fadeAnimBlue = useRef(new Animated.Value(0.4)).current
   const animateBlue = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require('../../assets/audio/e4.mp3')
@@ -93,7 +91,7 @@ export default function App(props) {
       useNativeDriver: true
     }).start(() => {
       Animated.timing(fadeAnimBlue, {
-        toValue: 0.2,
+        toValue: 0.4,
         duration: 500,
         useNativeDriver: true
       }).start()
@@ -103,7 +101,7 @@ export default function App(props) {
 
   // GREEN BUTTON
   // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnimGreen = useRef(new Animated.Value(0.2)).current
+  const fadeAnimGreen = useRef(new Animated.Value(0.4)).current
   const animateGreen = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require('../../assets/audio/g4.mp3')
@@ -118,7 +116,7 @@ export default function App(props) {
       useNativeDriver: true
     }).start(() => {
       Animated.timing(fadeAnimGreen, {
-        toValue: 0.2,
+        toValue: 0.4,
         duration: 500,
         useNativeDriver: true
       }).start()
@@ -203,13 +201,7 @@ export default function App(props) {
   }
 
   // Compare userInputArray with the solution array
-  // const [gameCondition, setGameCondition] = useState('PLAYING') // PLAYING WON LOST
-  // let gameCondition = 'PLAYING'
-  // console.log('\n\nResetting PLAYING CONDITION')
   var checkGameWinCondition = () => {
-    // await wait()
-    // console.log('userInputArray', userInputArray)
-    // console.log('solution', solution)
     for (let i = 0; i < solution.length; i++) {
       if (userInputArray[i]) {
         if (userInputArray[i] == solution[i]) {
@@ -219,12 +211,8 @@ export default function App(props) {
             return 'WON'
           }
         } else {
-          // console.log('\nLOST = RESTARTING THE GAME')
           return 'LOST'
-          // SHow the restart game UI / Button
-
-          // console.log('solution[i]>', solution[i], '<')
-          // console.log('userInputArray[i]>', userInputArray[i], '<')
+          // Show the restart game UI / Button
         }
       } else {
         return 'PLAYING'
@@ -239,98 +227,95 @@ export default function App(props) {
     // Button will light up on-press with the passed props text
     <>
       <Text style={[styles.heading]}>Repeat the pattern!</Text>
-      {gameCondition === 'LOST' && (
-        <Text style={[styles.playAgainButton]} onPress={props.onPlayAgain}>
-          Play again
-        </Text>
-      )}
-      {gameCondition === 'WON' && (
-        <Text style={[styles.playAgainButton]} onPress={props.onWinCondition}>
-          SHUT THIS SONG OFF
-        </Text>
-      )}
+      <ImageBackground
+        source={require('../../assets/AppBackground.jpg')}
+        style={{ flex: 1, width: null, height: null, opacity: 1 }}
+      >
+        <View style={styles.overlay} />
+        {gameCondition === 'LOST' && (
+          <Text style={[styles.playAgainButton]} onPress={props.onPlayAgain}>
+            Play again
+          </Text>
+        )}
+        {gameCondition === 'WON' && (
+          <Text style={[styles.playAgainButton]} onPress={props.onWinCondition}>
+            Shut off the alarm!
+          </Text>
+        )}
+        <SafeAreaView style={styles.container}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              animateYellow()
+              registerButton('Yellow')
+            }}
+          >
+            <Animated.View
+              style={[
+                styles.fadingContainer,
+                {
+                  // Bind opacity to animated value
+                  backgroundColor: 'yellow',
+                  opacity: fadeAnimYellow
+                }
+              ]}
+            ></Animated.View>
+          </TouchableWithoutFeedback>
 
-      <SafeAreaView style={styles.container}>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            animateYellow()
-            registerButton('Yellow')
-          }}
-        >
-          <Animated.View
-            style={[
-              styles.fadingContainer,
-              {
-                // Bind opacity to animated value
-                backgroundColor: 'yellow',
-                opacity: fadeAnimYellow
-              }
-            ]}
-          ></Animated.View>
-        </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              animateBlue()
+              registerButton('Blue')
+            }}
+          >
+            <Animated.View
+              style={[
+                styles.fadingContainer,
+                {
+                  // Bind opacity to animated value
+                  backgroundColor: 'blue',
+                  opacity: fadeAnimBlue
+                }
+              ]}
+            ></Animated.View>
+          </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback
-          onPress={() => {
-            animateBlue()
-            registerButton('Blue')
-          }}
-        >
-          <Animated.View
-            style={[
-              styles.fadingContainer,
-              {
-                // Bind opacity to animated value
-                backgroundColor: 'blue',
-                opacity: fadeAnimBlue
-              }
-            ]}
-          ></Animated.View>
-        </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              animateRed()
+              registerButton('Red')
+            }}
+          >
+            <Animated.View
+              style={[
+                styles.fadingContainer,
+                {
+                  // Bind opacity to animated value
+                  backgroundColor: 'red',
+                  opacity: fadeAnimRed
+                }
+              ]}
+            ></Animated.View>
+          </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback
-          onPress={() => {
-            animateRed()
-            registerButton('Red')
-          }}
-        >
-          <Animated.View
-            style={[
-              styles.fadingContainer,
-              {
-                // Bind opacity to animated value
-                backgroundColor: 'red',
-                opacity: fadeAnimRed
-                // 'background-color': rgb(fadeAnim, 0, 0)
-              }
-            ]}
-          ></Animated.View>
-        </TouchableWithoutFeedback>
-
-        <TouchableWithoutFeedback
-          onPress={() => {
-            animateGreen()
-            registerButton('Green')
-          }}
-        >
-          <Animated.View
-            style={[
-              styles.fadingContainer,
-              {
-                // Bind opacity to animated value
-                backgroundColor: 'green',
-                opacity: fadeAnimGreen
-              }
-            ]}
-          ></Animated.View>
-        </TouchableWithoutFeedback>
-      </SafeAreaView>
-
-      {/* <View style={styles.buttonRow}>
-        <Button title="Fade In RED" onPress={animateRed} />
-        <Button title="Fade In YELLOW" onPress={animateYellow} />
-        <Button title="Fade In BLUE" onPress={animateBlue} />
-        <Button title="Fade In GREEN" onPress={animateGreen} />
-      </View> */}
+          <TouchableWithoutFeedback
+            onPress={() => {
+              animateGreen()
+              registerButton('Green')
+            }}
+          >
+            <Animated.View
+              style={[
+                styles.fadingContainer,
+                {
+                  // Bind opacity to animated value
+                  backgroundColor: 'green',
+                  opacity: fadeAnimGreen
+                }
+              ]}
+            ></Animated.View>
+          </TouchableWithoutFeedback>
+        </SafeAreaView>
+      </ImageBackground>
     </>
   )
 }
@@ -338,33 +323,39 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // backgroundColor: 'pink',
-    // marginTop: 50,
     flex: 1,
     minHeight: '40%',
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row'
   },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: 'black',
+    opacity: 0.7
+  },
   fadingContainer: {
     width: '50%',
     height: '50%'
   },
   buttonRow: {
-    // flexBasis: 100,
     marginVertical: 16
   },
   heading: {
     color: 'white',
-    marginTop: 20,
+    marginTop: 25,
     fontSize: 30
   },
   playAgainButton: {
-    marginTop: '70%',
-    height: '90%',
+    height: '100%',
     backgroundColor: 'black',
     color: 'white',
-    fontSize: 30,
+    paddingTop: '20%',
+    fontSize: 40,
     textAlign: 'center'
   }
 })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, ImageBackground } from 'react-native'
 // import shuffle from 'lodash.shuffle'
 import MyButton from './Button.js'
 
@@ -157,63 +157,75 @@ export default function App(props) {
   var gameStatus = CalculateGameStatus()
 
   return (
-    <View style={styles.fullPageContainer}>
-      {/* compute the style for the text based on the game status */}
+    <>
+      <Text style={[styles.heading]}>Order numbers from 1 to 8!</Text>
+      <ImageBackground
+        source={require('../../assets/AppBackground.jpg')}
+        style={{ flex: 1, width: null, height: null }}
+      >
+        <View style={styles.fullPageContainer}>
+          {/* compute the style for the text based on the game status */}
 
-      <View style={styles.randomButtonsContainer}>
-        {
-          // Prints every item in the random numbers array
-          gameStateArray.map((buttonNumberText, index) => (
-            <MyButton
-              small="true"
-              id={index}
-              key={index}
-              text={buttonNumberText}
-              onPress={moveTile}
-              isDisabled={buttonNumberText === null || shuffling === true}
-            ></MyButton>
-          ))
-        }
-        {
-          // if a user has won/lost the game, they will have the option to Play Again
-          gameStatus === 'LOST' && (
-            <MyButton
-              text={'Play Again'}
-              onPress={props.onPlayAgain}
-              isPlayAgain={true}
-            ></MyButton>
-          )
-        }
-        {
-          // if a user has won/lost the game, they will have the option to Play Again
-          shuffling && (
-            <MyButton
-              text={'Shuffling!'}
-              onPress={() => {}}
-              isPlayAgain={true}
-            ></MyButton>
-          )
-        }
-        {
-          // if a user has won/lost the game, they will have the option to Play Again
-          gameStatus === 'WON' && shuffling === false && (
-            <MyButton
-              text={'Shut this song off!'}
-              onPress={props.onWinCondition}
-              isPlayAgain={true}
-            ></MyButton>
-          )
-        }
-      </View>
-    </View>
+          <View style={styles.randomButtonsContainer}>
+            {
+              // Prints every item in the random numbers array
+              gameStateArray.map((buttonNumberText, index) => (
+                <MyButton
+                  small="true"
+                  id={index}
+                  key={index}
+                  text={buttonNumberText}
+                  onPress={moveTile}
+                  isDisabled={buttonNumberText === null || shuffling === true}
+                ></MyButton>
+              ))
+            }
+            {
+              // if a user has won/lost the game, they will have the option to Play Again
+              gameStatus === 'LOST' && (
+                <MyButton
+                  text={'Play Again'}
+                  onPress={props.onPlayAgain}
+                  isPlayAgainLose={true}
+                ></MyButton>
+              )
+            }
+            {
+              // The user will have the option to shuffle again/play Again
+              shuffling && (
+                <MyButton
+                  text={'Shuffling!'}
+                  onPress={() => {}}
+                  isPlayAgainLose={true}
+                ></MyButton>
+              )
+            }
+            {
+              // if a user has won/lost the game, they will have the option to Play Again
+              gameStatus === 'WON' && shuffling === false && (
+                <MyButton
+                  text={'Shut off the alarm!'}
+                  onPress={props.onWinCondition}
+                  isPlayAgainWon={true}
+                ></MyButton>
+              )
+            }
+          </View>
+        </View>
+      </ImageBackground>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   fullPageContainer: {
-    paddingTop: '40%',
-    backgroundColor: 'lightblue',
+    paddingTop: '20%',
     flex: 1
+  },
+  heading: {
+    color: 'white',
+    marginTop: 25,
+    fontSize: 30
   },
   playAgainButton: {
     paddingBottom: 200,
@@ -229,7 +241,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow'
   },
   STATUS_WON: {
-    backgroundColor: 'green'
+    backgroundColor: '#7FFF00'
   },
   STATUS_LOST: {
     backgroundColor: 'red'

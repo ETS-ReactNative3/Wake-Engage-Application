@@ -19,9 +19,7 @@ export default function App(props) {
   }
 
   let handleDeleteAlarm = () => {
-    // tell our game that I have been pressed.
     props.onDelete(props)
-    // console.warn(props.text)
   }
 
   return (
@@ -36,14 +34,6 @@ export default function App(props) {
             size={25}
             color="#bfbfbf"
           />
-          {/* <Switch
-            style={[styles.switch]}
-            trackColor={{ false: '#4d4d4d', true: '#7FFF00' }}
-            thumbColor={isEnabled ? '#F8F8FF' : '#F8F8FF'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          /> */}
         </View>
 
         <View style={[styles.bottowRow]}>
@@ -70,7 +60,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: 'hidden'
-    // justifyContent: 'flex-start'
   },
   topRow: {
     flexDirection: 'row',
@@ -84,8 +73,6 @@ const styles = StyleSheet.create({
   },
   date: {
     paddingLeft: 25,
-    // textAlign: 'center',
-    // alignItems: 'center',
     color: '#bfbfbf',
     fontSize: 15,
     paddingBottom: 10
