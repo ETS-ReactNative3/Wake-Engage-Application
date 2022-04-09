@@ -12,7 +12,7 @@
 
 Wake Engage is a mobile application that provides alarm clock functionality merged with three mind-stimulating games: Sum-Up, 8-Puzzle, and The Simon Game. The app is available for Android and IOS and provides users with the ability to set their alarm settings as with a typical alarm clock. However, that is where convention ends. Once the alarm clock rings the user can only turn off the alarm by first engaging in one of the simple and fun games. This alarm clock is sure to assist those who routinely turn their alarm clock off and go back to sleep - sometimes numerous times.
 
-<iframe src="https://giphy.com/embed/ihhJmFwomq25FBkASp" width="240" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<img src="https://github.com/bernadetteveni/Wake-Engage-Application" data-canonical-src="https://media.giphy.com/media/ihhJmFwomq25FBkASp/giphy.gif" width="200" height="400" />
     
 ## Table of contents
 
