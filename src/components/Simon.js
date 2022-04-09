@@ -17,9 +17,10 @@ export default function App(props) {
 
   const playCountdown = async () => {
     const { sound } = await Audio.Sound.createAsync(
-      require('../../assets/audio/countdown.wav')
+      require('../../assets/audio/countdown.mov')
     )
     setSound(sound)
+    console.log('Playing Countdown')
     // Start the sound
     sound.playAsync()
   }
