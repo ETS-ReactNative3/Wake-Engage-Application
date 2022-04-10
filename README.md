@@ -98,6 +98,7 @@ Run react-devtools for debugging / troubleshooting:
 `yarn devtools` or `yarn run react-devtools`
 
 ## Project Status
+Version 1.0 of the Wake Engage application has been completed. Version 2.0 (v2) of the application is in its planning stages, as outined below. 
 ## Road Map
 
 Additional functionalities to be included in v2 of Wake Engage are:
@@ -110,6 +111,14 @@ Additional functionalities to be included in v2 of Wake Engage are:
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 
 ## Contribute
+If you would like to contribute to the Wake Engage application, follow the steps outlined <a href="https://gist.github.com/MarcDiethelm/7303312">here</a>.
+In summary:
+```
+- Create a personal fork of the project on Github.
+- Clone the fork on your local machine. Your remote repo on Github is called origin.
+- Push your branch to your fork on Github, the remote origin.
+- From your fork open a pull request in the correct branch.  Target the project's master branch
+```
 
 ## Links to further reading
 
@@ -124,5 +133,6 @@ Additional functionalities to be included in v2 of Wake Engage are:
 ## Credits and Acknowledgments
 
 - <a href="https://pngtree.com/freepng/cute-alarm-sains-gaming-illustration-isolated-in-purple-backgr_4773949.html">Logo</a>
+- <a href="https://www.deviantart.com/catdragon4/art/Question-Mark-Background-741094355">App Background</a>
 
 - <a href="https://shields.io/#your-badge">Shields</a>
