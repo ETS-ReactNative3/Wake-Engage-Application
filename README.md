@@ -24,14 +24,12 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 - [Usage](#usage)
 - [Manifest](#manifest)
 - [Troubleshooting Tips](#troubleshooting-tips)
+- [Road Map](#road-map)
+- [Project Status](#project-status)
 - [Contact Details](#contact-details)
-- [Sponsors](#sponsors)
 - [Contribute](#contribute)
 - [License / Copyright](#license-/-copyright)
 - [Credits and Acknowledgments](#credits-and-acknowledgments)
-- [Bug List](#bug-list)
-- [Road Map](#road-map)
-- [Project Status](#project-status)
 
 ## Installation Instructions
 
@@ -42,16 +40,18 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 5. `yarn start`
 
 ## Operating instructions
+
 To start the application:
-    `"start": "expo start", or "yarn start"`
-    `"android": "expo start --android",`
-    `"ios": "expo start --ios",`
-    `"web": "expo start --web",`
+`"start": "expo start", or "yarn start"`
+`"android": "expo start --android",`
+`"ios": "expo start --ios",`
+`"web": "expo start --web",`
 
 To eject to application:
-    `"eject": "expo eject",`
+`"eject": "expo eject",`
 
 Once the server is running you may open the <a href=https://expo.dev/>EXPO</a> application (available on the App Store and Google Play Store) to use Wake Engage on your IOS or Android mobile device.
+
 ## Configuration Instructions
 
 app.json, babel.config.js, .prettierrc and .eslintrc.json have been provided as personal taste configuration options to format, edit and debug the application.
@@ -59,25 +59,30 @@ app.json, babel.config.js, .prettierrc and .eslintrc.json have been provided as 
 If you would like to modify which file is opened on app start up, you can edit the App.js file, located at ~/Wake-Engage-Application/App.js
 
 By default, the application opens to the alarm page:
-`const [pageId, setPageId] = useState('alarm')` 
+`const [pageId, setPageId] = useState('alarm')`
 `const [game, setGame] = useState('0')`
 
 To have the app open to one of the game pages:
-`const [pageId, setPageId] = useState('games')` 
+`const [pageId, setPageId] = useState('games')`
 `const [game, setGame] = useState('1')` for Sum-Up game Or,
 `const [game, setGame] = useState('2')` for 8-Puzzle game Or,
 `const [game, setGame] = useState('3')` for The Simon Game
+
 ## Usage
+
 ### Alarm System
+
 This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game theuser would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
 
 ### Games
+
 The user will be redirected to the the game selected during the alarm set-up through the triggered notifications. An alarm will play continuously until the user has won the game. There is the option to ‘Play Again’ if the user loses the game. When the user wins the game they may hit the “Shut off the alarm!” button.
 
 ## Manifest
+
 ```
 - App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles push notifications for alarm functionality.
-- Games.js ------> Loads game view (SumUp.js, Simon.js or 8Puzzle.js) based on ShowGame state retrieved from user during alarm set up. 
+- Games.js ------> Loads game view (SumUp.js, Simon.js or 8Puzzle.js) based on ShowGame state retrieved from user during alarm set up.
 - AlarmList.js --> Set alarm and delete alarm functionality. Retrieves and loads all current alarms to the view.
 - Alarm.js ------> Converts time and date into readable strings with styling for better user experience.
 - SumUp.js ------> Contains all Sum-Up game functionality.
@@ -92,25 +97,26 @@ The user will be redirected to the the game selected during the alarm set-up thr
 Run react-devtools for debugging / troubleshooting:
 `yarn devtools` or `yarn run react-devtools`
 
+## Project Status
+## Road Map
+
+Additional functionalities to be included in v2 of Wake Engage are:
+
+- The addition of a Firebase database which will store the user's game score (time it took to win the game).
+- The top 5 game scores of all users for that day to will be queried from the database and posted for all users to view.
 ## Contact Details
-| <img style="border-radius: 1000px; height:100px;" src=".../../assets/me.jpg">  |<a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p>|
-|---|---|
 
+| <img style="border-radius: 1000px; height:100px;" src=".../../assets/me.jpg"> | <a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p> |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 
-## Sponsors
 ## Contribute
-
-This is for poeple who would like to contribute
-
-Please make sure to read the [Contributing Guide](https://github.com/vuejs/vue/blob/dev/.github/CONTRIBUTING.md) before making a pull request. If you have a Vue-related project/component/tool, add it with a pull request to [this curated list](https://github.com/vuejs/awesome-vue)!
-
-Thank you to all the people who already contributed to Vue!
 
 ## Links to further reading
 
 - <a href="https://medium.com/geekculture/first-class-push-notifications-for-expo-apps-4bd7bbb9a01a">Making notifications work in production for iOS with Apple Developer Account (required)</a>
 
 - <a href="https://docs.expo.dev/guides/routing-and-navigation/">Replace current hand made router with official EXPO Router</a>
+
 ## License / Copyright
 
 [MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022, @bernadetteveni
@@ -120,8 +126,3 @@ Thank you to all the people who already contributed to Vue!
 - <a href="https://pngtree.com/freepng/cute-alarm-sains-gaming-illustration-isolated-in-purple-backgr_4773949.html">Logo</a>
 
 - <a href="https://shields.io/#your-badge">Shields</a>
-
-## Bug List
-
-## Road Map
-## Project Status
