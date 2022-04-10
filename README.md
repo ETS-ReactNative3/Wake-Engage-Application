@@ -22,7 +22,7 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 - [Operating instructions](#operating-instructions)
 - [Configuration Instructions](#configuration-instructions)
 - [Usage](#usage)
-- [Manifest (List of Files)](#a-manifest-(list-of-files))
+- [Manifest](#manifest)
 - [Troubleshooting Tips](#troubleshooting-tips)
 - [Contact Details](#contact-details)
 - [Sponsors](#sponsors)
@@ -40,20 +40,16 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 3. `cd /Wake-Engage-Application`
 4. `yarn install`
 5. `yarn start`
-6. Optional `yarn devtools` for debugging
 
 ## Operating instructions
 To start the application:
-    `"start": "expo start",`
+    `"start": "expo start", or "yarn start"`
     `"android": "expo start --android",`
     `"ios": "expo start --ios",`
     `"web": "expo start --web",`
 
 To eject to application:
     `"eject": "expo eject",`
-
-To run devtools (debugging):
-    `"devtools": "yarn run react-devtools"`
 
 Once the server is running you may open the <a href=https://expo.dev/>EXPO</a> application (available on the App Store and Google Play Store) to use Wake Engage on your IOS or Android mobile device.
 ## Configuration Instructions
@@ -93,13 +89,13 @@ The user will be redirected to the the game selected during the alarm set-up thr
 
 ## Troubleshooting Tips
 
-Run react-devtools for debugging.
-
+Run react-devtools for debugging / troubleshooting:
 `yarn devtools` or `yarn run react-devtools`
 
 ## Contact Details
+| <img style="border-radius: 1000px; height:100px;" src=".../../assets/me.jpg">  |<a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p>|
+|---|---|
 
-<a href="mailto:bernadette.v.123@gmail.com">Email me</a>
 
 ## Sponsors
 ## Contribute
