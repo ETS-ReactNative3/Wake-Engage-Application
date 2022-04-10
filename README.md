@@ -29,7 +29,8 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 - [Contribute](#contribute)
 - [License / Copyright](#license-/-copyright)
 - [Credits and Acknowledgments](#credits-and-acknowledgments)
-- [Bug list](#bug-list)
+- [Bug List](#bug-list)
+- [Road Map](#road-map)
 - [Project Status](#project-status)
 
 ## Installation Instructions
@@ -75,7 +76,7 @@ To have the app open to one of the game pages:
 This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game theuser would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
 
 ### Games
-The user will be redirected to the the game selected during the alarm set-up through the triggered notifications. An alarm will play continuously until the user has won the game. There is the option to ‘Play Again’ if the user loses the game. When the user wins the game they may hit the “shut off the alarm” button.
+The user will be redirected to the the game selected during the alarm set-up through the triggered notifications. An alarm will play continuously until the user has won the game. There is the option to ‘Play Again’ if the user loses the game. When the user wins the game they may hit the “Shut off the alarm!” button.
 
 ## Manifest
 ```
@@ -124,5 +125,7 @@ Thank you to all the people who already contributed to Vue!
 
 - <a href="https://shields.io/#your-badge">Shields</a>
 
-## Bug list
+## Bug List
+
+## Road Map
 ## Project Status
