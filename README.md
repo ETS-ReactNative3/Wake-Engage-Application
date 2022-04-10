@@ -19,81 +19,89 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 ## Table of contents
 
 - [Installation Instructions](#installation-instructions)
+- [Operating instructions](#operating-instructions)
 - [Configuration Instructions](#configuration-instructions)
+- [Usage](#usage)
+- [Manifest (List of Files)](#a-manifest-(list-of-files))
+- [Troubleshooting Tips](#troubleshooting-tips)
+- [Contact Details](#contact-details)
+- [Sponsors](#sponsors)
+- [Contribute](#contribute)
+- [License / Copyright](#license-/-copyright)
+- [Credits and Acknowledgments](#credits-and-acknowledgments)
+- [Bug list](#bug-list)
+- [Project Status](#project-status)
 
 ## Installation Instructions
 
 1. <a href="https://docs.expo.dev/get-started/installation/">Follow EXPO Install page for your machine</a>
 2. `git clone https://github.com/bernadetteveni/Wake-Engage-Application`
-3. `cd Wake-Engage-Application/`
+3. `cd /Wake-Engage-Application`
 4. `yarn install`
-5. `yarn start ` or `yarn ios` or `yarn web` or
+5. `yarn start`
 6. Optional `yarn devtools` for debugging
 
+## Operating instructions
+To start the application:
+    `"start": "expo start",`
+    `"android": "expo start --android",`
+    `"ios": "expo start --ios",`
+    `"web": "expo start --web",`
+
+To eject to application:
+    `"eject": "expo eject",`
+
+To run devtools (debugging):
+    `"devtools": "yarn run react-devtools"`
+
+Once the server is running you may open the <a href=https://expo.dev/>EXPO</a> application (available on the App Store and Google Play Store) to use Wake Engage on your IOS or Android mobile device.
 ## Configuration Instructions
 
-There are no major config options with exception of app.json, Babel, prettier and eslint all of which are personal taste configuration options.
+app.json, babel.config.js, .prettierrc and .eslintrc.json have been provided as personal taste configuration options to format, edit and debug the application.
 
-## Operating instructions
+If you would like to modify which file is opened on app start up, you can edit the App.js file, located at ~/Wake-Engage-Application/App.js
 
-There are many ways to start the application:
+By default, the application opens to the alarm page:
+`const [pageId, setPageId] = useState('alarm')` 
+`const [game, setGame] = useState('0')`
 
-1. `yarn start`
-2. `yarn ios`
-3. `yarn android`
-4. `yarn web`
-5. `yarn eject`
+To have the app open to one of the game pages:
+`const [pageId, setPageId] = useState('games')` 
+`const [game, setGame] = useState('1')` for Sum-Up game Or,
+`const [game, setGame] = useState('2')` for 8-Puzzle game Or,
+`const [game, setGame] = useState('3')` for The Simon Game
+## Usage
+### Alarm System
+This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game theuser would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
 
-Once the server is running you may open the EXPO android app to test it on your phone.
-Note: Notification system only works on ANDROID OS.
+### Games
+The user will be redirected to the the game selected during the alarm set-up through the triggered notifications. An alarm will play continuously until the user has won the game. There is the option to ‘Play Again’ if the user loses the game. When the user wins the game they may hit the “shut off the alarm” button.
 
-## A manifest (list of files)
-
-The app consists at the moment of an alarm view and 3 different games.
+## Manifest
+```
+- App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles push notifications for alarm functionality.
+- Games.js ------> Loads game view (SumUp.js, Simon.js or 8Puzzle.js) based on ShowGame state retrieved from user during alarm set up. 
+- AlarmList.js --> Set alarm and delete alarm functionality. Retrieves and loads all current alarms to the view.
+- Alarm.js ------> Converts time and date into readable strings with styling for better user experience.
+- SumUp.js ------> Contains all Sum-Up game functionality.
+- Simon.js ------> Contains all Simon game functionality.
+- 8Puzzle.js ----> Contains all 8-Puzzle game functionality.
+```
 
 <img width="50%" alt="File structure tree" src="https://github.com/bernadetteveni/Wake-Engage-Application/blob/baa406910fbe12773e40f38389cdc3ea029fa286/assets/Manifest.png?raw=true" />
 
-## Bug list
+## Troubleshooting Tips
 
-No bugs are known at the moment.
+Run react-devtools for debugging.
 
-## Troubleshooting tips
+`yarn devtools` or `yarn run react-devtools`
 
-Run react-devtools devtools for debugging.
-
-```
-yarn add --dev react-devtools
-```
-
-`yarn devtools` or (same) `yarn run react-devtools`
-
-## Demo screenshots / gifs
-
-## Links to further reading
-
-- <a href="https://medium.com/geekculture/first-class-push-notifications-for-expo-apps-4bd7bbb9a01a">Making notifications work in production for iOS with Apple Developer Account (required)</a>
-
-- <a href="https://docs.expo.dev/guides/routing-and-navigation/">Replace current hand made router with official EXPO Router</a>
-
-## Change log
-
-Please see commit history for the changelog.
-
-## Sponsors
-
-I would like to thank my family and my credit card for sponsoring this project and my education.
-
-## Documentation
-
-## Questions / Issues
-
-Please use GitHub Issues to ask a question or create a bug.
-
-## Stay In Touch
+## Contact Details
 
 <a href="mailto:bernadette.v.123@gmail.com">Email me</a>
 
-## Contribution
+## Sponsors
+## Contribute
 
 This is for poeple who would like to contribute
 
@@ -101,14 +109,20 @@ Please make sure to read the [Contributing Guide](https://github.com/vuejs/vue/b
 
 Thank you to all the people who already contributed to Vue!
 
-## Contact information
+## Links to further reading
 
+- <a href="https://medium.com/geekculture/first-class-push-notifications-for-expo-apps-4bd7bbb9a01a">Making notifications work in production for iOS with Apple Developer Account (required)</a>
+
+- <a href="https://docs.expo.dev/guides/routing-and-navigation/">Replace current hand made router with official EXPO Router</a>
 ## License / Copyright
 
 [MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022, @bernadetteveni
 
-## Credits and acknowledgments
+## Credits and Acknowledgments
 
 - <a href="https://pngtree.com/freepng/cute-alarm-sains-gaming-illustration-isolated-in-purple-backgr_4773949.html">Logo</a>
 
 - <a href="https://shields.io/#your-badge">Shields</a>
+
+## Bug list
+## Project Status
