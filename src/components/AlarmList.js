@@ -63,7 +63,7 @@ export default function Apps() {
   }
 
   const addAlarm = () => {
-    console.log('Showign date')
+    console.log('Showing date')
     showMode('date')
   }
   const showModal = () => {
@@ -190,6 +190,14 @@ export default function Apps() {
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => {
+                    setModalVisible(false)
+                  }}
+                >
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
                     if (selectedGame === 0 || selectedGame === undefined) {
                       Alert.alert('Please select a game', '', [{ text: 'OK' }])
                     } else {
@@ -199,14 +207,6 @@ export default function Apps() {
                   }}
                 >
                   <Text style={styles.textStyle}>Next</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => {
-                    setModalVisible(false)
-                  }}
-                >
-                  <Text style={styles.textStyle}>Cancel</Text>
                 </Pressable>
               </DataTable.Row>
             </View>
@@ -262,9 +262,11 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
     elevation: 2,
-    marginBottom: 20
+    margin: 10
   },
   buttonOpen: {
     backgroundColor: '#F194FF'
