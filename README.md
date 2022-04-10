@@ -60,12 +60,16 @@ If you would like to modify which file is opened on app start up, you can edit t
 
 By default, the application opens to the alarm page:
 `const [pageId, setPageId] = useState('alarm')`
+
 `const [game, setGame] = useState('0')`
 
 To have the app open to one of the game pages:
 `const [pageId, setPageId] = useState('games')`
+
 `const [game, setGame] = useState('1')` for Sum-Up game Or,
+
 `const [game, setGame] = useState('2')` for 8-Puzzle game Or,
+
 `const [game, setGame] = useState('3')` for The Simon Game
 
 ## Usage
@@ -90,7 +94,7 @@ The user will be redirected to the the game selected during the alarm set-up thr
 - 8Puzzle.js ----> Contains all 8-Puzzle game functionality.
 ```
 
-<img width="50%" alt="File structure tree" src="https://github.com/bernadetteveni/Wake-Engage-Application/blob/baa406910fbe12773e40f38389cdc3ea029fa286/assets/Manifest.png?raw=true" />
+<img width="50%" alt="File structure tree" src="https://github.com/bernadetteveni/Wake-Engage-Application/blob/8ba5ff276180cdcd76c000c3089eeb1a6447e50b/assets/Manifest.png?raw=true" />
 
 ## Troubleshooting Tips
 
@@ -131,8 +135,14 @@ In summary:
 [MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022, @bernadetteveni
 
 ## Credits and Acknowledgments
-
 - <a href="https://pngtree.com/freepng/cute-alarm-sains-gaming-illustration-isolated-in-purple-backgr_4773949.html">Logo</a>
 - <a href="https://www.deviantart.com/catdragon4/art/Question-Mark-Background-741094355">App Background</a>
-
 - <a href="https://shields.io/#your-badge">Shields</a>
+- <a href="https://thenounproject.com/icon/trash-4665730/">Icon</a>
+- Hvidsten, B. (2020, December 21). Adding timers to your expo managed react native app with backgroundfetch. Medium. Retrieved April 9, 2022, from https://align2source.medium.com/adding-timers-to-your-expo-managed-react-native-app-with-backgroundfetch-351dab97b96b 
+- Notifications. Expo Documentation. (n.d.). Retrieved April 9, 2022, from https://docs.expo.dev/versions/latest/sdk/notifications/#notificationspresentlocalnotificationasynclocalnotification 
+- React-Native-Datetimepicker. (n.d.). React-native-datetimepicker/Datetimepicker: React native date &amp; time picker component for IOS, Android and windows. GitHub. Retrieved April 9, 2022, from https://github.com/react-native-datetimepicker/datetimepicker 
+
+
+
+
