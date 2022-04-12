@@ -6,17 +6,17 @@
     <br>
 </h1>
 <h4 align="center">Wake Engage is a mobile alarm clock application that incorporates mind-stimulating games to provide an efficient and dependable way to start your day.<h4>
-<p align="center"><img src="https://img.shields.io/badge/version -v1.0.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/dependencies-out%20of%20date-orange" alt="expo" style="max-width: 100%;"></a>
+<p align="center"><img src="https://img.shields.io/badge/version -v1.0.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/framework-react%20native-orange" alt="expo" style="max-width: 100%;"></a>
 
 ## Project Description
 
 Wake Engage is a mobile application that provides alarm clock functionality merged with three mind-stimulating games: Sum-Up, 8-Puzzle, and The Simon Game. The app is available for Android and IOS and provides users with the ability to set their alarm settings as with a typical alarm clock. However, that is where convention ends. Once the alarm clock rings the user can only turn off the alarm by first engaging in one of the simple and fun games. This alarm clock is sure to assist those who routinely turn their alarm clock off and go back to sleep - sometimes numerous times.
 
 <div align="center">
-<img src="giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/JjnBl4hhy206F5pFEv/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/I3oMRh4Cb9fUc2ul7l/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/ZcvyOmeuInAVdcRQNH/giphy.gif" width="200" height="400" />
+<img src=".../../assets/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/JjnBl4hhy206F5pFEv/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/I3oMRh4Cb9fUc2ul7l/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/ZcvyOmeuInAVdcRQNH/giphy.gif" width="200" height="400" />
 </div>
     
-## Table of contents
+## Table of Contents
 
 - [Installation Instructions](#installation-instructions)
 - [Operating instructions](#operating-instructions)
@@ -24,10 +24,11 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 - [Usage](#usage)
 - [Manifest](#manifest)
 - [Troubleshooting Tips](#troubleshooting-tips)
-- [Road Map](#road-map)
 - [Project Status](#project-status)
+- [Road Map](#road-map)
 - [Contact Details](#contact-details)
 - [Contribute](#contribute)
+- [Links to Further Readings](#links-to-further-readings)
 - [License / Copyright](#license-/-copyright)
 - [Credits and Acknowledgments](#credits-and-acknowledgments)
 
@@ -76,7 +77,7 @@ To have the app open to one of the game pages:
 
 ### Alarm System
 
-This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game theuser would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
+This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game the user would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
 
 ### Games
 
@@ -85,7 +86,7 @@ The user will be redirected to the the game selected during the alarm set-up thr
 ## Manifest
 
 ```
-- App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles push notifications for alarm functionality.
+- App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles notifications for alarm functionality.
 - Games.js ------> Loads game view (SumUp.js, Simon.js or 8Puzzle.js) based on ShowGame state retrieved from user during alarm set up.
 - AlarmList.js --> Set alarm and delete alarm functionality. Retrieves and loads all current alarms to the view.
 - Alarm.js ------> Converts time and date into readable strings with styling for better user experience.
@@ -124,7 +125,7 @@ In summary:
 - From your fork open a pull request in the correct branch.  Target the project's master branch
 ```
 
-## Links to further reading
+## Links to Further Readings
 
 - <a href="https://medium.com/geekculture/first-class-push-notifications-for-expo-apps-4bd7bbb9a01a">Making notifications work in production for iOS with Apple Developer Account (required)</a>
 
