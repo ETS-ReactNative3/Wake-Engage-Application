@@ -24,10 +24,11 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 - [Usage](#usage)
 - [Manifest](#manifest)
 - [Troubleshooting Tips](#troubleshooting-tips)
-- [Road Map](#road-map)
 - [Project Status](#project-status)
+- [Road Map](#road-map)
 - [Contact Details](#contact-details)
 - [Contribute](#contribute)
+- [Links to Further Readings](#links-to-further-readings)
 - [License / Copyright](#license-/-copyright)
 - [Credits and Acknowledgments](#credits-and-acknowledgments)
 
@@ -124,7 +125,7 @@ In summary:
 - From your fork open a pull request in the correct branch.  Target the project's master branch
 ```
 
-## Links to further reading
+## Links to Further Readings
 
 - <a href="https://medium.com/geekculture/first-class-push-notifications-for-expo-apps-4bd7bbb9a01a">Making notifications work in production for iOS with Apple Developer Account (required)</a>
 
