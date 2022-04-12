@@ -77,7 +77,7 @@ To have the app open to one of the game pages:
 
 ### Alarm System
 
-This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game theuser would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
+This is the page the application will open to on app start up. The alarm page will provide the user with the ability to set and delete alarms. Any future date and time may be selected when setting an alarm. The user may enter a description for each alarm. The ability to select which game the user would like to play when the alarm goes off (Sum-Up, 8-Puzzle or The Simon Game) is also provided. The alarm will go off at the selected time, and trigger a series of notifications to allow it to “ring” while the application is closed. The alarm will ring continuously until the application is opened via notification.
 
 ### Games
 
@@ -86,7 +86,7 @@ The user will be redirected to the the game selected during the alarm set-up thr
 ## Manifest
 
 ```
-- App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles push notifications for alarm functionality.
+- App.js --------> Loads page view based on 'pageId' and 'game' states (AlarmList.js page view by default). Handles notifications for alarm functionality.
 - Games.js ------> Loads game view (SumUp.js, Simon.js or 8Puzzle.js) based on ShowGame state retrieved from user during alarm set up.
 - AlarmList.js --> Set alarm and delete alarm functionality. Retrieves and loads all current alarms to the view.
 - Alarm.js ------> Converts time and date into readable strings with styling for better user experience.
