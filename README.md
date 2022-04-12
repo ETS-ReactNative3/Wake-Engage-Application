@@ -6,7 +6,7 @@
     <br>
 </h1>
 <h4 align="center">Wake Engage is a mobile alarm clock application that incorporates mind-stimulating games to provide an efficient and dependable way to start your day.<h4>
-<p align="center"><img src="https://img.shields.io/badge/version -v1.0.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/dependencies-out%20of%20date-orange" alt="expo" style="max-width: 100%;"></a>
+<p align="center"><img src="https://img.shields.io/badge/version -v1.0.0-blue" alt="version" style="max-width: 100%;"> <img src="https://img.shields.io/npm/l/vue.svg?sanitize=true" alt="License"> <img src="https://img.shields.io/badge/coverage-0%25-red" alt="coverage" style="max-width: 100%;"> <img src="https://img.shields.io/badge/npm-v8.4.1-blue" alt="npm" style="max-width: 100%;"> <img src="https://img.shields.io/badge/yarn-v1.22.17-blue" alt="yarn" style="max-width: 100%;"> <img src="https://img.shields.io/badge/expo-v5.3.0-blue" alt="expo" style="max-width: 100%;"> <img src="https://img.shields.io/badge/framework-react%20native-orange" alt="expo" style="max-width: 100%;"></a>
 
 ## Project Description
 
