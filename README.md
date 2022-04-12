@@ -108,7 +108,7 @@ Version 1.0 of the Wake Engage application has been completed. Version 2.0 (v2) 
 Additional functionalities to be included in v2 of Wake Engage are:
 
 - The addition of a Firebase database which will store the user's game score (time it took to win the game).
-- The top 5 game scores of all users for that day to will be queried from the database and posted for all users to view.
+- The top 5 game scores of all users for that day will be queried from the database and posted for all users to view.
 ## Contact Details
 
 | <img style="border-radius: 1000px; height:100px;" src=".../../assets/me.jpg"> | <a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p> |
