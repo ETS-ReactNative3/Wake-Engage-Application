@@ -9,6 +9,7 @@ export default function Apps(prop) {
   const [sound, setSound] = React.useState()
   const [isPlaying, setIsPlaying] = React.useState('Play from start')
 
+  // Alarm sound that will play until game is won
   async function playSound() {
     console.log('Loading Sound')
     const { sound } = await Audio.Sound.createAsync(
@@ -36,14 +37,14 @@ export default function Apps(prop) {
   const [gameId, setGameId] = useState(0)
   // 0 = Show nothing
   // 1 = SumUp game
+  // 2 = 8-Puzzle
+  // 3 = Simon Game
   const [showGame, setShowGame] = useState(prop.game)
-  // console.log(showGame)
-  // Increment gameID
+  // Increment gameID to restart game
   var restartTheGame = () => {
     setGameId(gameId + 1)
   }
   var gameWon = () => {
-    // console.warn('WON the game')
     stopSound() //  shut off the alarm/sound on the game is done
     setShowGame(0) // Hide the game, will not show any game
     prop.onWinCondition()

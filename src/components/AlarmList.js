@@ -19,7 +19,7 @@ import Alarm from './Alarm.js'
 import { DataTable } from 'react-native-paper'
 
 export default function Apps() {
-  // DateTime
+  // To set alarm DateTime
   const [date, setDate] = useState(new Date())
   const [mode, setMode] = useState('date')
   const [show, setShow] = useState(false)
@@ -29,6 +29,7 @@ export default function Apps() {
   let [alarms, setAlarms] = useState([])
 
   let [selectedGame, setSelectedGame] = useState()
+  // Get all alarms set
   useEffect(() => {
     getAllNotifications()
   }, [])
@@ -43,6 +44,7 @@ export default function Apps() {
     }
   }, [date])
 
+  // Date time picker for android and ios
   const onDateChange = async (event, selectedDate) => {
     await setShow(Platform.OS === 'ios')
     if (mode === 'time') {
@@ -62,6 +64,7 @@ export default function Apps() {
     setShow(true)
   }
 
+  // Setting alarm date
   const addAlarm = () => {
     console.log('Showing date')
     showMode('date')
@@ -71,6 +74,7 @@ export default function Apps() {
     setModalVisible(true)
   }
 
+  // Notifications to trigger at set alarm date/time
   let scheduleNotification = async () => {
     const trigger = new Date(date)
     trigger.setSeconds(0) // First notification will go off at 0 seconds
@@ -109,8 +113,8 @@ export default function Apps() {
     console.log(alarms)
   }
 
+  // Delete functionality
   async function deleteAlarmById(props) {
-    // console.log('Alarm list deleting:', props)
     await alarms.map(async (alarm) => {
       if (alarm.content.title === props.title) {
         await Notifications.cancelScheduledNotificationAsync(alarm.identifier)
@@ -180,6 +184,7 @@ export default function Apps() {
                   selectedValue={selectedGame}
                   onValueChange={(itemValue) => setSelectedGame(itemValue)}
                 >
+                  {/* Pick game to run when alarm triggers */}
                   <Picker.Item label="Please select a game..." value="0" />
                   <Picker.Item label="Sum-Up" value="1" />
                   <Picker.Item label="8-Puzzle" value="2" />
@@ -198,6 +203,7 @@ export default function Apps() {
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => {
+                    // User must select a game (required)
                     if (selectedGame === 0 || selectedGame === undefined) {
                       Alert.alert('Please select a game', '', [{ text: 'OK' }])
                     } else {

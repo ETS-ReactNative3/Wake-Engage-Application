@@ -4,7 +4,6 @@ import shuffle from 'lodash.shuffle'
 import MyButton from './Button.js'
 
 export default function App(props) {
-  //props.numberOfOptionButtons
   const [state, setState] = useState({
     // Will store the index of the selected numbers
     selectedIDs: []

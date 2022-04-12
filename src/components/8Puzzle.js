@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Text, ImageBackground } from 'react-native'
-// import shuffle from 'lodash.shuffle'
 import MyButton from './Button.js'
 
 export default function App(props) {
@@ -26,7 +25,6 @@ export default function App(props) {
   }
 
   useEffect(() => {
-    // setGameStateArray(shuffle(gameStateArray))
     shuffleArray()
   }, [])
 
@@ -59,7 +57,7 @@ export default function App(props) {
     } else if (moveDirection === 2) {
       // DOWN
       if (nullIndex < 6) {
-        // Can we go up
+        // Can we go down
         setGameStateArray(
           Array.from(swapArray(gameStateArray, nullIndex, nullIndex + 3))
         )
@@ -89,7 +87,7 @@ export default function App(props) {
 
   const shuffleArray = () => {
     let madeMoves = 0
-    // Call shuffleOnce() every 1.5 seconds but only 100 times
+    // Call shuffleOnce() every 1.5 seconds but only 10 times
     let timer = setInterval(function () {
       if (madeMoves === 10) {
         clearInterval(timer)
@@ -100,10 +98,6 @@ export default function App(props) {
         madeMoves++
       }
     }, 500)
-
-    // for (let i = 0; i <= 10; i++) {
-    //   shuffleOnce()
-    // }
   }
 
   var moveTile = (tileIndex) => {

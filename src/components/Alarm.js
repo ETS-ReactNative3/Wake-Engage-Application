@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function App(props) {
+  // Convert date to readable string
   let getPrintableDate = () => {
     return (
       props.date.toString().split(' ')[1] +
@@ -11,6 +12,7 @@ export default function App(props) {
     )
   }
 
+  // Convert time to readable string
   let getPrintableTime = () => {
     return (
       props.date.getHours() + ':' + props.date.getMinutes() ||
@@ -18,6 +20,7 @@ export default function App(props) {
     )
   }
 
+  // Delete functionality
   let handleDeleteAlarm = () => {
     props.onDelete(props)
   }
@@ -26,7 +29,9 @@ export default function App(props) {
     <View style={[styles.container]}>
       <TouchableOpacity>
         <View style={[styles.topRow]}>
+          {/* Print time that alarm was set for */}
           <Text style={[styles.time]}>{getPrintableTime()}</Text>
+          {/* Delete button */}
           <Ionicons
             onPress={handleDeleteAlarm}
             style={[styles.switch]}
@@ -38,6 +43,7 @@ export default function App(props) {
 
         <View style={[styles.bottowRow]}>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            {/* Print date that alarm was set for */}
             <Text style={[styles.date]}>{getPrintableDate()}</Text>
           </View>
 

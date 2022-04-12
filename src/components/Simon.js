@@ -15,6 +15,7 @@ import { Audio } from 'expo-av'
 export default function App(props) {
   const [sound, setSound] = useState()
 
+  // Countdown audio to alert user on game start
   const playCountdown = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require('../../assets/audio/countdown.mov')
@@ -33,9 +34,10 @@ export default function App(props) {
       require('../../assets/audio/f-4.mp3')
     )
     setSound(sound)
-    // Start the sound
+    // Start the sound for this button
     sound.playAsync()
 
+    // Button will light up for 500ms
     Animated.timing(fadeAnimRed, {
       toValue: 1,
       duration: 500,
@@ -58,9 +60,10 @@ export default function App(props) {
       require('../../assets/audio/d4.mp3')
     )
     setSound(sound)
-    // Start the sound
+    // Start the sound for this button
     sound.playAsync()
 
+    // Button will light up for 500ms
     Animated.timing(fadeAnimYellow, {
       toValue: 1,
       duration: 500,
@@ -83,9 +86,10 @@ export default function App(props) {
       require('../../assets/audio/e4.mp3')
     )
     setSound(sound)
-    // Start the sound
+    // Start the sound for this button
     sound.playAsync()
 
+    // Button will light up for 500ms
     Animated.timing(fadeAnimBlue, {
       toValue: 1,
       duration: 500,
@@ -108,9 +112,10 @@ export default function App(props) {
       require('../../assets/audio/g4.mp3')
     )
     setSound(sound)
-    // Start the sound
+    // Start the sound for this button
     sound.playAsync()
 
+    // Button will light up for 500ms
     Animated.timing(fadeAnimGreen, {
       toValue: 1,
       duration: 500,
@@ -150,26 +155,21 @@ export default function App(props) {
   ///////////////////////////////////////// GAME LOGIC
 
   const registerButton = (buttonColor) => {
-    // console.log(buttonColor, ' pressed')
     setUserInputArray((oldArray) => [...oldArray, buttonColor])
   }
 
   // Every time userInputArray changes check win condition
   React.useEffect(async () => {
-    // console.log('userInputArray was updated to ', userInputArray)
     // If won or lost no need to recalculate
     if (gameCondition === 'PLAYING') {
-      // console.log('Checking game condition')
       gameCondition = checkGameWinCondition()
-      // console.log('new gameCondition', gameCondition)
     }
   }, [[userInputArray]])
 
   // Starting game logic
   const [userInputArray, setUserInputArray] = useState([])
-  // setUserInputArray(oldArray => [...oldArray,newValue] ); add at the end
-  // setUserInputArray(oldArray => [newValue,...oldArray] ); add at the beginning
   const [solution] = useState(
+    // Play shuffled colours array
     shuffle(['Yellow', 'Blue', 'Red', 'Green', 'Yellow', 'Blue'])
   )
   console.log('solution', solution)
@@ -179,16 +179,16 @@ export default function App(props) {
     await wait4()
     for (let i = 0; i < solution.length; i++) {
       if (solution[i] == 'Yellow') {
-        // console.log('Playing yellow')
+        // Playing yellow
         animateYellow()
       } else if (solution[i] == 'Blue') {
-        // console.log('Playing blue')
+        // Playing blue
         animateBlue()
       } else if (solution[i] == 'Red') {
-        // console.log('Playing red')
+        // Playing red
         animateRed()
       } else if (solution[i] == 'Green') {
-        // console.log('Playing green')
+        // Playing green'
         animateGreen()
       }
       await wait()
@@ -206,9 +206,9 @@ export default function App(props) {
     for (let i = 0; i < solution.length; i++) {
       if (userInputArray[i]) {
         if (userInputArray[i] == solution[i]) {
-          // console.log(i, ' the same')
+          // The same
           if (i === solution.length - 1) {
-            // console.log('WON - KILL THE GAME')
+            // WON - KILL THE GAME
             return 'WON'
           }
         } else {
@@ -222,7 +222,6 @@ export default function App(props) {
   }
 
   var gameCondition = checkGameWinCondition()
-  // console.log('\nGame condition 214', gameCondition)
 
   return (
     // Button will light up on-press with the passed props text

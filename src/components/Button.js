@@ -2,15 +2,12 @@ import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function App(props) {
-  // props.text
-
   let handlePress = () => {
     if (props.isDisabled) {
       return
     }
-    // tell our game that I have been pressed.
+    // Tell game that I have been pressed.
     props.onPress(props.id)
-    // console.warn(props.text)
   }
 
   return (
