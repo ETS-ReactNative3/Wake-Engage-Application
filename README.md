@@ -16,7 +16,7 @@ Wake Engage is a mobile application that provides alarm clock functionality merg
 <img src=".../../assets/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/JjnBl4hhy206F5pFEv/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/I3oMRh4Cb9fUc2ul7l/giphy.gif" width="200" height="400" /> <img src="https://media.giphy.com/media/ZcvyOmeuInAVdcRQNH/giphy.gif" width="200" height="400" />
 </div>
     
-## Table of contents
+## Table of Contents
 
 - [Installation Instructions](#installation-instructions)
 - [Operating instructions](#operating-instructions)
