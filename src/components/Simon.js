@@ -27,7 +27,7 @@ export default function App(props) {
   }
 
   // RED BUTTON
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // fadeAnim will be used as the value for opacity. Initial Value: 0.4
   const fadeAnimRed = useRef(new Animated.Value(0.4)).current
   const animateRed = async () => {
     const { sound } = await Audio.Sound.createAsync(
@@ -53,7 +53,7 @@ export default function App(props) {
   // RED BUTTON END
 
   // YELLOW BUTTON
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // fadeAnim will be used as the value for opacity. Initial Value: 0.4
   const fadeAnimYellow = useRef(new Animated.Value(0.4)).current
   const animateYellow = async () => {
     const { sound } = await Audio.Sound.createAsync(
@@ -79,7 +79,7 @@ export default function App(props) {
   // YELLOW BUTTON END
 
   // BLUE BUTTON
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // fadeAnim will be used as the value for opacity. Initial Value: 0.4
   const fadeAnimBlue = useRef(new Animated.Value(0.4)).current
   const animateBlue = async () => {
     const { sound } = await Audio.Sound.createAsync(
@@ -105,7 +105,7 @@ export default function App(props) {
   // BLUE BUTTON END
 
   // GREEN BUTTON
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  // fadeAnim will be used as the value for opacity. Initial Value: 0.4
   const fadeAnimGreen = useRef(new Animated.Value(0.4)).current
   const animateGreen = async () => {
     const { sound } = await Audio.Sound.createAsync(
