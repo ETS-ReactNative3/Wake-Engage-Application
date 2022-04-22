@@ -112,7 +112,7 @@ Additional functionalities to be included in v2 of Wake Engage are:
 - The top 5 game scores of all users for that day will be queried from the database and posted for all users to view.
 ## Contact Details
 
-| <img style="border-radius: 1000px; height:100px;" src=".../../assets/me.png"> | <a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p> |
+| <img style="border-radius: 1000px; height:100px;" src=".../../assets/photo.jpg"> | <a href="mailto:bernadette.v.123@gmail.com">Email me</a> <p>University of Regina</p> |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 
 ## Contribute
